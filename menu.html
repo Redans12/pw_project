@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuncunul</title>
+    <link rel="stylesheet" href="menuStyle.css">
+    <link rel="icon" href="resources/cero.ico" type="image/x-icon" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kurale&family=Quattrocento+Sans&family=Raleway:wght@400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="script_menu.js" defer></script>
+
+</head>
+
+<body>
+    <header>
+        <div class="w3-top">
+            <div class="w3-bar w3-padding w3-card">
+                <a href="restaurantProject.html#home" class="w3-bar-item w3-button">Cuncunul</a>
+                <div class="w3-right w3-hide-small">
+                    <a href="restaurantProject.html#about" class="w3-bar-item w3-button">Sobre nosotros</a>
+                    <a href="restaurantProject.html#contact" class="w3-bar-item w3-button">Contacto</a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="restaurantProject.html">Inicio</a></li>
+            </ul>
+        </nav>
+        <div class="tabs">
+            <button class="tab-button" onclick="showTab('platillos')">Platillos</button>
+            <button class="tab-button" onclick="showTab('postres')">Postres</button>
+            <button class="tab-button" onclick="showTab('bebidas')">Bebidas</button>
+        </div>
+    </header>
+
+
+    <main>
+        <div class="tab-content" id="platillos">
+            <div class="carousel-container">
+                <div class="carousel">
+                    <!-- Añade las imágenes y descripciones de los platillos -->
+                    <div class="carousel-item">
+                        <div class="description">
+                            <p style="font-family: 'Quattrocento Sans',  sans-serif; font-size: 25px; "><b>Cochinita
+                                    Pibil</b></p>
+                            <p style="  font-family: 'Raleway', sans-serif;font-size: 20px;
+                            color: white;text-align: justify;margin-top: 20px;
+                            margin-left: 90px;width: 600px;
+                             ">Este platillo ofrece una experiencia sensorial única,
+                                con una carne tierna y jugosa que se deshace en la boca, acompañada
+                                de la vibrante explosión de sabores cítricos y especiados. Perfectamente
+                                servida con cebolla morada encurtida y tortillas frescas.</p>
+                        </div>
+                        <div class="image">
+                            <img src="resources/cochinita.webp" alt="Platillo 1">
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="description">
+                            <p style="font-family: 'Quattrocento Sans',  sans-serif; font-size: 25px;"><b>Tacos de
+                                    Camarón</b></p>
+                            <p style="  font-family: 'Raleway', sans-serif;font-size: 20px;
+                            color: white;text-align: end;margin-top: 20px;
+                            margin-left: 90px;width: 600px;
+                             ">Delicada combinación de camarones frescos, marinados en un toque de limón y especias,
+                                luego salteados a la perfección. Servidos en tortillas de maíz doradas, se acompañan
+                                con una cremosa salsa de aguacate, y un toque de col morada rallada.</p>
+                        </div>
+                        <div class="image">
+                            <img src="resources/tacos_camaron.png" alt="Platillo 2">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-button prev" onclick="prevSlide('platillos')">&#10094;</button>
+                    <button class="carousel-button next" onclick="nextSlide('platillos')">&#10095;</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="postres" style="display:none;">
+            <div class="carousel-container">
+                <div class="carousel">
+                    <!-- Añade las imágenes y descripciones de los postres -->
+                    <div class="carousel-item">
+                        <div class="description">
+                            <p style="font-family: 'Quattrocento Sans',  sans-serif; font-size: 25px;"><b>Pastel de
+                                    avellana y nuez</b></p>
+                            <p style="  font-family: 'Raleway', sans-serif;font-size: 20px;
+                            color: white;text-align: end;margin-top: 20px;
+                            margin-left: 90px;width: 600px;
+                             ">Esponjoso y húmedo, cada capa del pastel está delicadamente ensamblada con una crema
+                                suave y sedosa de avellanas, coronada con una ligera cobertura de glaseado de miel.</p>
+                        </div>
+                        <div class="image">
+                            <img src="resources/choc_cake.png" alt="Postre 1">
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="description">
+                            <p style="font-family: 'Quattrocento Sans',  sans-serif;
+                             font-size: 25px;"><b>Pastel lima y cítricos</b></p>
+                            <p style="  font-family: 'Raleway', sans-serif;font-size: 20px;
+                            color: white;text-align: end;margin-top: 20px;
+                            margin-left: 90px;width: 600px;
+                             ">Con una base suave y esponjosa, este pastel está impregnado con el jugo fresco de limas
+                                y una mezcla cítrica que despierta los sentidos. Cubierto con un glaseado ligero de
+                                limón.</p>
+                        </div>
+                        <div class="image">
+                            <img src="resources/lime_cake.png" alt="Postre 2">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-button prev" onclick="prevSlide('postres')">&#10094;</button>
+                    <button class="carousel-button next" onclick="nextSlide('postres')">&#10095;</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="bebidas" style="display:none;">
+            <div class="carousel-container">
+                <div class="carousel">
+                    <!-- Añade las imágenes y descripciones de las bebidas -->
+                    <div class="carousel-item">
+                        <div class="description">
+                            <p style="font-family: 'Quattrocento Sans',  sans-serif;
+                            font-size: 25px;"><b>Selección de Tequila</b></p>
+                            <p style="  font-family: 'Raleway', sans-serif;font-size: 20px;
+                            color: white;text-align: end;margin-top: 20px;
+                            margin-left: 90px;width: 600px;
+                             ">Cada botella representa la dedicación y el arte de los maestros tequileros, con
+                                tequilas añejos, reposados y blancos que ofrecen una diversidad de sabores, desde notas
+                                suaves y afrutadas hasta tonos ricos y ahumados.</p>
+                        </div>
+                        <div class="image">
+                            <img src="resources/tequila.png" alt="Bebida 1">
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="description">
+                            <p style="font-family: 'Quattrocento Sans',  sans-serif;
+                            font-size: 25px;"><b>Cerveza Artesanal</b></p>
+                            <p style="  font-family: 'Raleway', sans-serif;font-size: 20px;
+                            color: white;text-align: end;margin-top: 20px;
+                            margin-left: 90px;width: 600px;
+                             ">Cada cerveza ofrece un perfil de sabor único, desde las notas tostadas y caramelizadas
+                                de las cervezas oscuras, hasta los toques cítricos y florales de las cervezas claras.
+                            </p>
+                        </div>
+                        <div class="image">
+                            <img src="resources/cerveza.png" alt="Bebida 1">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-button prev" onclick="prevSlide('bebidas')">&#10094;</button>
+                    <button class="carousel-button next" onclick="nextSlide('bebidas')">&#10095;</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+
+</body>
+<footer>
+    <p>Hecho por:</p>
+    <ul>
+        <li>Chavez Hernandez Sandra</li>
+        <li>Ibarrola Origel Andres Daniel</li>
+    </ul>
+</footer>
+
+</html>

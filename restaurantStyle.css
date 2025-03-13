@@ -1,0 +1,271 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Estilos generales */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #7e2108;
+    color: rgb(255, 255, 255);
+}
+
+/* Sección principal */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Centra el contenido horizontalmente */
+    padding: 0;
+    /* Elimina el padding de la sección principal */
+    min-height: 80vh;
+    width: 100%;
+    /* Asegura que la sección principal ocupe todo el ancho */
+}
+
+.sobre-nosotros {
+    width: 80%;
+    /* Ajusta el ancho según sea necesario */
+    max-width: 800px;
+    /* Ancho máximo para los recuadros */
+    margin: 40px auto;
+    /* Centra los recuadros y agrega margen superior e inferior */
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    /* Fondo semi-transparente */
+    backdrop-filter: blur(10px);
+    /* Efecto de desenfoque */
+    border-radius: 10px;
+    text-align: center;
+    /* Centrar el contenido */
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sobre-nosotros-contenido {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.sobre-nosotros-contenido h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-family: 'Kurale', serif;
+    color: white;
+}
+
+.sobre-nosotros-contenido p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+    margin: 40px 0;
+}
+
+.contacto {
+    width: 80%;
+    /* Ajusta el ancho según sea necesario */
+    max-width: 800px;
+    /* Ancho máximo para los recuadros */
+    margin: 40px auto;
+    /* Centra los recuadros y agrega margen superior e inferior */
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    /* Fondo semi-transparente */
+    backdrop-filter: blur(10px);
+    /* Efecto de desenfoque */
+    border-radius: 10px;
+    text-align: center;
+    /* Centrar el contenido */
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contacto-contenido {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.columna {
+    flex: 1;
+    padding: 20px;
+}
+
+.columna h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-family: 'Kurale', serif;
+    color: white;
+}
+
+.columna p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+}
+
+h2 {
+    font-size: 2rem;
+    line-height: 1.2;
+    font-family: 'Raleway', sans-serif;
+}
+
+/* Contenedor del texto */
+.text-container {
+    max-width: 100%;
+}
+
+.text-container h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.text-container p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+/* Imagen del plato */
+.food-image {
+    height: auto;
+    width: auto;
+}
+
+/* Botón de reservación */
+.reservation-btn {
+    display: inline-block;
+    position: absolute;
+    /* Posiciona el botón de forma absoluta */
+    bottom: 20px;
+    /* Ajusta la distancia desde la parte inferior */
+    left: 50%;
+    /* Centra horizontalmente */
+    transform: translateX(-50%);
+    /* Ajusta para centrar completamente */
+    padding: 10px 20px;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.reservation-btn:hover {
+    background: white;
+    color: #7e2108;
+}
+
+/* Estilos del footer */
+footer {
+    background-color: #8a3206;
+    text-align: center;
+    font-family: 'Kurale', serif;
+    color: white;
+    padding: 20px;
+}
+
+ul {
+    list-style-type: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+.w3-bar {
+    background-color: #b84608 !important;
+    font-family: 'Raleway', sans-serif;
+    z-index: 1000;
+    position: relative;
+}
+
+.w3-bar .w3-bar-item.w3-button {
+    color: #ffffff !important;
+}
+
+.w3-button:hover {
+    background-color: #8a3206 !important;
+    color: white !important;
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Contenedor del slider */
+.slider-container {
+    position: relative;
+    width: 100%;
+    /* Ajusta el tamaño del slider al 100% del ancho de la página */
+    height: 500px;
+    overflow: hidden;
+    border-radius: 0;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0;
+    /* Elimina los márgenes */
+}
+
+/* Slider */
+.slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* Flechas de navegación */
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 40px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.prev:hover,
+.next:hover {
+    background: rgba(0, 0, 0, 0.7);
+    transform: scale(1.1);
+}

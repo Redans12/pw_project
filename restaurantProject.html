@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Cuncunul</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="cero.ico" type="image/x-icon" />
+
+    <!-- W3.CSS -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Quattrocento+Sans&family=Raleway:wght@400&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="restaurantStyle.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body class="background">
+    <!-- Header -->
+    <div class="w3-top" id="navbar">
+        <div class="w3-bar w3-padding w3-card">
+            <a href="#home" class="w3-bar-item w3-button"
+                style='font-family: kurale, serif; font-size: larger;'>Cuncunul</a>
+            <div class="w3-right w3-hide-small">
+                <a href="#about" class="w3-bar-item w3-button" onclick="scrollToSection(event, 'about')">Sobre nosotros</a>
+                <a href="menu.html" class="w3-bar-item w3-button">Menú</a>
+                <a href="#contact" class="w3-bar-item w3-button" onclick="scrollToSection(event, 'contact')">Contacto</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Principal -->
+    <div class="hero-section" id="home">
+        <div class="slider-container">
+            <div class="slider">
+                <img src="resources/alexandru-bogdan-ghita-UeYkqQh4PoI-unsplash.jpg" class="slide">
+                <img src="resources/davide-cantelli-jpkfc5_d-DI-unsplash.jpg" class="slide">
+                <img src="resources/brooke-lark-M4E7X3z80PQ-unsplash.jpg" class="slide">
+            </div>
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+            <button class="reservation-btn">Reservar</button>
+        </div>
+    </div>
+
+    <!-- Sobre Nosotros -->
+    <div class="sobre-nosotros" id="about">
+        <div class="sobre-nosotros-contenido">
+            <h2>Sobre nosotros</h2>
+            <p>Somos un restaurante dedicado a ofrecer la mejor experiencia culinaria, con platos tradicionales y un
+                toque moderno. Nuestro compromiso es brindar un servicio excepcional en un ambiente acogedor.</p>
+        </div>
+    </div>
+
+    <!-- Línea separadora -->
+    <hr class="separator">
+
+    <!-- Contacto -->
+    <div class="contacto" id="contact">
+        <div class="contacto-contenido">
+            <div class="columna">
+                <h2>Contacto</h2>
+                <p>Teléfono: +52 123 456 7890</p>
+                <p>Email: contacto@cuncunul.com</p>
+                <p>Email: reservas@cuncunul.com</p>
+            </div>
+            <div class="columna">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.1234567890!2d-99.1234567890!3d19.1234567890!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1234567890abcdef!2sCuncunul!5e0!3m2!1ses!2smx!4v1234567890"
+                    width="400" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Hecho por:</p>
+        <ul>
+            <li>Chavez Hernandez Sandra</li>
+            <li>Ibarrola Origel Andres Daniel</li>
+        </ul>
+    </footer>
+
+</body>
+
+<script>
+    function scrollToSection(event, sectionId) {
+        event.preventDefault();
+        const section = document.getElementById(sectionId);
+        const navbarHeight = document.getElementById('navbar').offsetHeight;
+        const sectionTop = section.offsetTop - navbarHeight;
+        window.scrollTo({
+            top: sectionTop,
+            behavior: 'smooth'
+        });
+    }
+
+    function loadMenu(event) {
+        event.preventDefault();
+        const menuContent = document.getElementById('menu-content');
+
+        if (!menuContent.innerHTML.trim()) { // Evita cargar el menú varias veces
+            fetch('menu.html')
+                .then(response => {
+                    if (!response.ok) throw new Error('Error al cargar el menú');
+                    return response.text();
+                })
+                .then(data => {
+                    menuContent.innerHTML = data;
+                    menuContent.scrollIntoView({ behavior: 'smooth' });
+                })
+                .catch(error => console.error(error));
+        } else {
+            menuContent.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+</script>
+
+</html>
