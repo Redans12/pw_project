@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Kurale&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Cuncunul</title>
     <link rel="stylesheet" href="menuStyle.css">
     <link rel="icon" href="resources/cero.ico" type="image/x-icon" />
@@ -12,6 +13,19 @@
 
 </head>
 <body>
+     <!-- Header -->
+    <div class="w3-top" id="navbar">
+        <div class="w3-bar w3-padding w3-card">
+            <a href="#home" class="w3-bar-item w3-button"
+                style='font-family: kurale, serif; font-size: larger;'>Cuncunul</a>
+            <div class="w3-right w3-hide-small">
+                <a href="#about" class="w3-bar-item w3-button" onclick="scrollToSection(event, 'about')">Sobre nosotros</a>
+                <a href="menu.html" class="w3-bar-item w3-button">Menú</a>
+                <a href="#contact" class="w3-bar-item w3-button" onclick="scrollToSection(event, 'contact')">Contacto</a>
+            </div>
+        </div>
+    </div> 
+
     <section class="menu" id="menu">   
     <div>
         <h1>Menú</h1>
