@@ -78,3 +78,25 @@
 .card:hover>div {
     display: flex
 }
+
+body {
+    padding-top: 59px; /* Ajusta según la altura del navbar */
+}
+
+.w3-bar {
+    background-color: #b84608 !important;
+    font-family: 'Raleway', sans-serif;
+    z-index: 1000;
+    position: relative;
+}
+
+.w3-bar .w3-bar-item.w3-button {
+    color: #ffffff !important;
+}
+
+.w3-button:hover {
+    background-color: #8a3206 !important;
+    color: white !important;
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
