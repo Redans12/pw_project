@@ -1,199 +1,80 @@
-/* Reset y estilos generales */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
-    min-height: 100vh;
+.menu {
+    width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    justify-content: space-between;
-    background-color: #7e2108;
-    color: rgb(255, 255, 255);
-    font-family: 'Raleway', sans-serif;
+    background-color: #e3ba7e
 }
 
-/* Header */
-header {
+.menu>div:first-of-type {
+    background-color: #bf792e;
     width: 100%;
-    background-color: #8a3206;
-    padding: 10px 0;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.w3-bar {
-    background-color: #b84608 !important;
-    font-family: 'Raleway', sans-serif;
-    z-index: 1000;
-    position: relative;
-}
-
-.w3-bar .w3-bar-item.w3-button {
-    color: #ffffff !important;
-}
-
-/* 🔹 Solución al fondo blanco de los botones */
-.w3-button {
-    background-color: transparent !important;
-    color: #ffffff !important;
-    border: 2px solid transparent;
-    font-family: 'Raleway', sans-serif;
-    font-size: 1rem;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-/* 🔹 Corregido el hover de los botones */
-.w3-button:hover {
-    background-color: #8a3206 !important;
-    color: white !important;
-    transform: scale(1.1);
-    box-shadow: none !important;
-}
-
-/* 🔹 Bloquear herencia de fondo blanco */
-.w3-bar-item {
-    background-color: transparent !important;
-}
-
-/* Menú de navegación */
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-/* Tabs del menú */
-.tabs {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.tab-button {
-    background-color: #b84608;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin: 0 10px;
-    border-radius: 5px;
-    font-family: 'Raleway', sans-serif;
-    transition: background-color 0.5s ease, color 0.5s ease;
-}
-
-.tab-button:hover {
-    background-color: #8a3206;
-}
-
-/* Contenido de las pestañas */
-.tab-content {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 1em 0
+}
+
+.menu>div:first-of-type h1 {
+    color: #f1e7cd;
+    font-family: butler bold;
+    font-size: 4rem
+}
+
+.menu section {
     width: 100%;
-    max-width: 1200px;
-    margin-top: 20px;
-    position: relative;
-}
-
-/* Estilos del carrusel */
-.carousel-container {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    overflow: hidden;
-    border-radius: 10px;
-    border: 2px solid #ffffff;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.carousel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-item {
-    min-width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-align: left;
-    padding: 20px;
-}
-
-/* Contenido de los platillos */
-.carousel-item .description {
-    flex: 1;
-    padding: 20px;
-}
-
-.carousel-item .description p {
-    font-size: 20px;
-    color: white;
-    text-align: justify;
-    width: 600px;
-}
-
-/* Imágenes dentro del carrusel */
-.carousel-item .image {
-    flex: 1;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap
 }
 
-.carousel-item img {
-    width: 300px;
-    height: auto;
-    border-radius: 10px;
+@keyframes cardAnimation {
+    0% {
+        position: relative;
+        opacity: 0;
+        bottom: -50vh
+    }
+
+    to {
+        position: relative;
+        opacity: 1;
+        bottom: 0
+    }
 }
 
-/* Flechas de navegación del carrusel */
-.carousel-controls {
+.card {
+    height: 20rem;
+    width: 25%;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat
+}
+
+.card div {
     position: absolute;
-    top: 50%;
+    top: 0;
+    left: 0;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
+    height: 100%;
+    display: none;
+    justify-content: center;
     align-items: center;
+    background-color: #f1e7cdb3
 }
 
-.carousel-button {
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    color: white;
-    font-size: 30px;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
+.card div:hover {
+    cursor: pointer
 }
 
-.carousel-button:hover {
-    background: rgba(0, 0, 0, 0.7);
-}
-
-/* Footer */
-footer {
-    background-color: #8a3206;
-    text-align: center;
+.card div h4 {
     font-family: 'Kurale', serif;
-    color: white;
-    padding: 20px;
+    color: #7e2108;
+}
+
+.card:hover>div {
+    display: flex
 }
