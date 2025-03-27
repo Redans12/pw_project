@@ -85,6 +85,7 @@ body {
 
 .about-text p {
     font-size: 1.1rem;
+    text-align: justify;
     line-height: 1.8;
     color: white;
     font-family: 'Raleway', sans-serif;
@@ -95,6 +96,7 @@ body {
     flex: 0.7;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     justify-content: space-between;
 }
@@ -125,6 +127,7 @@ body {
 /* ===== CONTACTO REDISEÑADO ===== */
 .contacto {
     width: 80%;
+    text-align: center;
     max-width: 1000px;
     margin: 60px auto;
     padding: 40px;
@@ -160,6 +163,7 @@ body {
 
 .columna.info {
     display: flex;
+    text-align: center;
     flex-direction: column;
     justify-content: center;
 }
@@ -176,8 +180,8 @@ body {
     content: '';
     position: absolute;
     bottom: -10px;
-    left: 0;
-    width: 60px;
+    left: 38%;
+    width: 100px;
     height: 3px;
     background-color: #e3ba7e;
 }
@@ -268,7 +272,7 @@ ul {
 }
 
 .w3-bar {
-    background-color: transparent !important;
+    background-color: #7e2108 !important;
     font-family: 'Raleway', sans-serif;
     z-index: 1000;
     position: relative;
@@ -351,6 +355,7 @@ ul {
 @media screen and (max-width: 768px) {
     .about-flex-container {
         flex-direction: column;
+
     }
     
     .contacto-contenido {
