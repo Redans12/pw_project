@@ -18,108 +18,193 @@ body {
     color: rgb(255, 255, 255);
 }
 
+/* Estilos del Header con logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    height: 30px;
+    width: auto;
+    margin-right: 10px;
+}
+
 /* Sección principal */
 .hero-section {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Centra el contenido horizontalmente */
     padding: 0;
-    /* Elimina el padding de la sección principal */
     min-height: 80vh;
     width: 100%;
-    /* Asegura que la sección principal ocupe todo el ancho */
 }
 
 .sobre-nosotros {
     width: 80%;
-    /* Ajusta el ancho según sea necesario */
-    max-width: 800px;
-    /* Ancho máximo para los recuadros */
-    margin: 40px auto;
-    /* Centra los recuadros y agrega margen superior e inferior */
-    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 40px;
     background: rgba(255, 255, 255, 0.1);
-    /* Fondo semi-transparente */
     backdrop-filter: blur(10px);
-    /* Efecto de desenfoque */
     border-radius: 10px;
-    text-align: center;
-    /* Centrar el contenido */
     position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.sobre-nosotros-contenido {
-    max-width: 800px;
-    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .sobre-nosotros-contenido h2 {
     font-size: 2.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-family: 'Kurale', serif;
     color: white;
+    text-align: center;
+    position: relative;
 }
 
-.sobre-nosotros-contenido p {
-    font-size: 1.2rem;
-    line-height: 1.6;
+.sobre-nosotros-contenido h2:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #e3ba7e;
+}
+
+.about-flex-container {
+    display: flex;
+    gap: 30px;
+    align-items: stretch;
+}
+
+.about-text {
+    flex: 1;
+    text-align: left;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
     color: white;
     font-family: 'Raleway', sans-serif;
+    margin-bottom: 15px;
 }
 
+.about-images {
+    flex: 0.7;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.about-img {
+    width: auto;
+    max-width: 75%;
+    height: auto;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.about-img:hover {
+    transform: scale(1.03);
+}
+
+/* Separador con estilo mejorado */
 .separator {
     border: 0;
     height: 1px;
     background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
-    margin: 40px 0;
+    margin: 60px auto;
+    width: 70%;
 }
 
+/* ===== CONTACTO REDISEÑADO ===== */
 .contacto {
     width: 80%;
-    /* Ajusta el ancho según sea necesario */
-    max-width: 800px;
-    /* Ancho máximo para los recuadros */
-    margin: 40px auto;
-    /* Centra los recuadros y agrega margen superior e inferior */
-    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 40px;
     background: rgba(255, 255, 255, 0.1);
-    /* Fondo semi-transparente */
     backdrop-filter: blur(10px);
-    /* Efecto de desenfoque */
     border-radius: 10px;
-    text-align: center;
-    /* Centrar el contenido */
     position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .contacto-contenido {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row-reverse;
+    gap: 30px;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .columna {
     flex: 1;
-    padding: 20px;
 }
 
-.columna h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+.columna.mapa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.columna.mapa iframe {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 100%;
+}
+
+.columna.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.columna.info h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
     font-family: 'Kurale', serif;
     color: white;
+    position: relative;
 }
 
-.columna p {
-    font-size: 1.2rem;
+.columna.info h2:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: #e3ba7e;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+    color: #e3ba7e;
+}
+
+.contact-item p {
+    font-size: 1.1rem;
     line-height: 1.6;
     color: white;
     font-family: 'Raleway', sans-serif;
+    margin: 0;
 }
 
 h2 {
@@ -144,35 +229,28 @@ h2 {
     margin-top: 10px;
 }
 
-/* Imagen del plato */
-.food-image {
-    height: auto;
-    width: auto;
-}
-
 /* Botón de reservación */
 .reservation-btn {
     display: inline-block;
     position: absolute;
-    /* Posiciona el botón de forma absoluta */
     bottom: 20px;
-    /* Ajusta la distancia desde la parte inferior */
     left: 50%;
-    /* Centra horizontalmente */
     transform: translateX(-50%);
-    /* Ajusta para centrar completamente */
-    padding: 10px 20px;
+    padding: 12px 24px;
     border: 2px solid white;
     background: transparent;
     color: white;
     font-size: 1.4rem;
     cursor: pointer;
     transition: 0.3s ease-in-out;
+    border-radius: 4px;
+    font-family: 'Raleway', sans-serif;
 }
 
 .reservation-btn:hover {
     background: white;
     color: #7e2108;
+    transform: translateX(-50%) scale(1.05);
 }
 
 /* Estilos del footer */
@@ -190,7 +268,7 @@ ul {
 }
 
 .w3-bar {
-    background-color: #b84608 !important;
+    background-color: transparent !important;
     font-family: 'Raleway', sans-serif;
     z-index: 1000;
     position: relative;
@@ -201,9 +279,10 @@ ul {
 }
 
 .w3-button:hover {
-    background-color: #8a3206 !important;
+    background-color: transparent !important;
     color: white !important;
     transform: scale(1.1);
+    text-decoration: underline;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -211,14 +290,12 @@ ul {
 .slider-container {
     position: relative;
     width: 100%;
-    /* Ajusta el tamaño del slider al 100% del ancho de la página */
     height: 500px;
     overflow: hidden;
     border-radius: 0;
     border: none;
     background: rgba(255, 255, 255, 0.1);
     margin: 0;
-    /* Elimina los márgenes */
 }
 
 /* Slider */
@@ -268,4 +345,24 @@ ul {
 .next:hover {
     background: rgba(0, 0, 0, 0.7);
     transform: scale(1.1);
+}
+
+/* Media queries para responsive */
+@media screen and (max-width: 768px) {
+    .about-flex-container {
+        flex-direction: column;
+    }
+    
+    .contacto-contenido {
+        flex-direction: column;
+    }
+    
+    .columna.mapa {
+        margin-top: 30px;
+    }
+    
+    .sobre-nosotros, .contacto {
+        width: 90%;
+        padding: 30px 20px;
+    }
 }

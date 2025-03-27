@@ -54,3 +54,4 @@ function loadMenu(event) {
         })
         .catch(error => console.error('Error al cargar el menú:', error));
 }
+
