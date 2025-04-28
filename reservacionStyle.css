@@ -1,0 +1,401 @@
+/* Estilos mejorados para la página de reservación */
+
+.reservation-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 120px auto 60px;
+    padding: 40px;
+    background: rgba(126, 33, 8, 0.8);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(227, 186, 126, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de decoración en las esquinas */
+.reservation-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at top left, rgba(227, 186, 126, 0.2), transparent 70%);
+    z-index: -1;
+}
+
+.reservation-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at bottom right, rgba(227, 186, 126, 0.2), transparent 70%);
+    z-index: -1;
+}
+
+.reservation-header {
+    text-align: center;
+    margin-bottom: 35px;
+    position: relative;
+}
+
+.reservation-header h2 {
+    font-size: 2.5rem;
+    font-family: 'Kurale', serif;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 25px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+}
+
+.reservation-header h2:after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(to right, transparent, #e3ba7e, transparent);
+}
+
+.welcome-message {
+    text-align: center;
+    margin-bottom: 35px;
+    font-family: 'Raleway', sans-serif;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+    color: #fff;
+}
+
+.form-column {
+    flex: 1;
+    padding: 0 15px;
+    min-width: 200px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-family: 'Raleway', sans-serif;
+    color: #e3ba7e;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.form-control {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(227, 186, 126, 0.3);
+    border-radius: 8px;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) inset;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #e3ba7e;
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0 0 3px rgba(227, 186, 126, 0.2);
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Estilo para los select */
+select.form-control {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="6" viewBox="0 0 12 6"><path fill="%23e3ba7e" d="M0 0l6 6 6-6z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 35px;
+}
+
+/* Estilo para los option dentro del select */
+select.form-control option {
+    background-color: #7e2108;
+    color: white;
+}
+
+/* Estilo para textarea */
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Botón principal */
+.btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(to right, rgba(227, 186, 126, 0.9), rgba(227, 186, 126, 0.8));
+    color: #7e2108;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    background: #e3ba7e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto de onda al hacer click */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    transform-origin: 50% 50%;
+}
+
+.btn:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+/* Estilos para botones secundarios */
+.btn-cancelar {
+    background: transparent;
+    border: 2px solid #e3ba7e;
+    color: #e3ba7e;
+}
+
+.btn-cancelar:hover {
+    background: rgba(227, 186, 126, 0.2);
+}
+
+/* Botones en fila */
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.form-buttons .btn {
+    margin-top: 0;
+}
+
+.logout-link {
+    text-align: center;
+    margin-top: 25px;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    position: relative;
+    padding-top: 20px;
+}
+
+.logout-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 1px;
+    background-color: rgba(227, 186, 126, 0.5);
+}
+
+.logout-link a {
+    color: #e3ba7e;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.logout-link a:hover {
+    background-color: rgba(227, 186, 126, 0.2);
+    text-decoration: none;
+}
+
+/* Estilos para resaltar campos con error */
+.form-control.error {
+    border-color: #ff6b6b;
+    background-color: rgba(255, 107, 107, 0.1);
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: none;
+}
+
+.form-control.error + .error-message {
+    display: block;
+}
+
+/* Estado de carga en el formulario */
+.form-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.form-loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(126, 33, 8, 0.5);
+    z-index: 100;
+    border-radius: 15px;
+}
+
+.form-loading::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(227, 186, 126, 0.3);
+    border-radius: 50%;
+    border-top-color: #e3ba7e;
+    animation: spin 1s linear infinite;
+    z-index: 101;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Mejoras para inputs tipo time y date */
+input[type="date"].form-control, 
+input[type="time"].form-control {
+    position: relative;
+    padding-right: 35px;
+}
+
+input[type="date"].form-control::-webkit-calendar-picker-indicator,
+input[type="time"].form-control::-webkit-calendar-picker-indicator {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23e3ba7e" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Media queries para responsive */
+@media screen and (max-width: 768px) {
+    .reservation-container {
+        padding: 30px 20px;
+        margin: 100px auto 40px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .form-buttons {
+        flex-direction: column;
+    }
+    
+    .reservation-header h2 {
+        font-size: 2rem;
+    }
+    
+    .btn {
+        padding: 12px;
+    }
+}
+
+/* Estilo de fondo para inputs */
+.background {
+    position: relative;
+    min-height: 100vh;
+    background: url('resources/loginb.webp') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.background::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: -1;
+}
+
+/* Asegurarnos que los colores de texto en los select sean correctos */
+#personas option {
+    color: black;
+    background-color: white;
+}
+
+/* Mejorar la visibilidad del texto seleccionado en el select */
+#personas {
+    color: white;
+}
+
+#personas option:checked {
+    background-color: #e3ba7e;
+    color: #7e2108;
+}

@@ -1,0 +1,226 @@
+/* Fondo de la página */
+body.background {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: url('resources/loginb.webp') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+
+/* Capa oscura sobre el fondo para mejorar contraste */
+body.background::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Estilos específicos para la página de login */
+.login-container {
+    width: 90%;
+    max-width: 450px;
+    margin: 120px auto 60px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h2 {
+    font-size: 2.2rem;
+    font-family: 'Kurale', serif;
+    color: white;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.login-header h2:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #e3ba7e;
+}
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-icon {
+    width: 55px; /* Ajusta el tamaño según necesites */
+    height: 55px;
+    margin-bottom: 0px; /* Espacio entre el ícono y el título */
+    display: block; /* Para que ocupe su propia línea */
+    margin-left: auto; /* Centrado horizontal */
+    margin-right: auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    transition: all 0.3s ease;
+    
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #e3ba7e;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: white;
+    color: #7e2108;
+}
+
+.separator-text {
+    position: relative;
+    text-align: center;
+    margin: 25px 0;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    font-size: 1.1rem;
+   
+}
+
+.separator-text:before,
+.separator-text:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 32%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.separator-text:before {
+    left: 0;
+}
+
+.separator-text:after {
+    right: 0;
+}
+
+.social-login {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.social-btn {
+    flex: 1;
+    padding: 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+}
+
+.google-btn {
+    background: rgba(219, 68, 55, 0.8);
+}
+
+.facebook-btn {
+    background: rgba(59, 89, 152, 0.8);
+}
+
+.apple-btn {
+    background: rgba(51, 51, 51, 0.8);
+}
+
+.social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.social-btn i {
+    margin-right: 5px;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.register-link a {
+    color: #2e1f08;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para el formulario de registro (inicialmente oculto) */
+#register-form {
+    display: none;
+}
+
+.form-toggle {
+    cursor: pointer;
+    color: #20170a;
+}
+.form-toggle:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
