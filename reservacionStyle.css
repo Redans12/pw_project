@@ -369,7 +369,7 @@ input[type="time"].form-control::-webkit-calendar-picker-indicator {
 .background {
     position: relative;
     min-height: 100vh;
-    background: url('resources/loginb.webp') no-repeat center center fixed;
+    background: url('resources/img1.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 

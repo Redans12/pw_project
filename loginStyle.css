@@ -3,7 +3,7 @@ body.background {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background: url('resources/loginb.webp') no-repeat center center fixed;
+    background: url('resources/forbackground.jpg') no-repeat center center fixed;
     background-size: cover;
     position: relative;
 }
