@@ -1,140 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
+  <head>
     <title>Cuncunul</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="resources/cero.ico" type="image/x-icon" />
 
     <!-- W3.CSS -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Quattrocento+Sans&family=Raleway:wght@400&display=swap"
-        rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kurale&family=Quattrocento+Sans&family=Raleway:wght@400&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="restaurantStyle.css">
+    <link rel="stylesheet" href="restaurantStyle.css" />
     <script src="script.js" defer></script>
-</head>
+  </head>
 
-<body class="background">
+  <body class="background">
     <!-- Header -->
     <div class="w3-top" id="navbar">
-        <div class="w3-bar w3-padding w3-card">
-            <a href="index.html" class="w3-bar-item w3-button logo-container">
-                <img src="resources/cero.ico" alt="Logo Cuncunul" class="header-logo">
-                <span style='font-family: kurale, serif; font-size: larger;'>Cuncunul</span>
-            </a>
-            <div class="w3-right w3-hide-small">
-                <a href="#about" class="w3-bar-item w3-button" onclick="scrollToSection(event, 'about')">Sobre nosotros</a>
-                <a href="menu.html" class="w3-bar-item w3-button">Menú</a>
-                <a href="#contact" class="w3-bar-item w3-button" onclick="scrollToSection(event, 'contact')">Contacto</a>
-            </div>
+      <div class="w3-bar w3-padding w3-card">
+        <a href="index.html" class="w3-bar-item w3-button logo-container">
+          <img
+            src="resources/cero.ico"
+            alt="Logo Cuncunul"
+            class="header-logo"
+          />
+          <span style="font-family: kurale, serif; font-size: larger"
+            >Cuncunul</span
+          >
+        </a>
+        <div class="w3-right w3-hide-small">
+          <a
+            href="#about"
+            class="w3-bar-item w3-button"
+            onclick="scrollToSection(event, 'about')"
+            >Sobre nosotros</a
+          >
+          <a href="menu.html" class="w3-bar-item w3-button">Menú</a>
+          <a
+            href="#contact"
+            class="w3-bar-item w3-button"
+            onclick="scrollToSection(event, 'contact')"
+            >Contacto</a
+          >
         </div>
+      </div>
     </div>
 
     <!-- Sección Principal -->
     <div class="hero-section" id="home">
-        <div class="slider-container">
-            <div class="slider">
-                <img src="resources/alexandru-bogdan-ghita-UeYkqQh4PoI-unsplash.jpg" class="slide" alt="Imagen 1">
-                <img src="resources/davide-cantelli-jpkfc5_d-DI-unsplash.jpg" class="slide" alt="Imagen 2">
-                <img src="resources/brooke-lark-M4E7X3z80PQ-unsplash.jpg" class="slide" alt="Imagen 3">
-            </div>
-            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-            <button class="next" onclick="moveSlide(1)">&#10095;</button>
-           <!-- <button class="reservation-btn">Reservar</button>-->
-            <a href="login.html" class="reservation-btn">Reservar</a>
+      <div class="slider-container">
+        <div class="slider">
+          <img
+            src="resources/alexandru-bogdan-ghita-UeYkqQh4PoI-unsplash.jpg"
+            class="slide"
+            alt="Imagen 1"
+          />
+          <img
+            src="resources/davide-cantelli-jpkfc5_d-DI-unsplash.jpg"
+            class="slide"
+            alt="Imagen 2"
+          />
+          <img
+            src="resources/brooke-lark-M4E7X3z80PQ-unsplash.jpg"
+            class="slide"
+            alt="Imagen 3"
+          />
         </div>
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        <!-- <button class="reservation-btn">Reservar</button>-->
+        <a href="login.html" class="reservation-btn">Reservar</a>
+      </div>
     </div>
 
     <!-- Sobre Nosotros -->
     <div class="sobre-nosotros" id="about">
-        <div class="sobre-nosotros-contenido">
-            <h2>Sobre nosotros</h2>
-            <div class="about-flex-container">
-                <div class="about-text">
-                    <p>Cuncunul nace como un homenaje a la rica tradición culinaria de la península de Yucatán, fusionando recetas ancestrales con técnicas contemporáneas. Nos enorgullece ofrecer una experiencia gastronómica auténtica que celebra los sabores, aromas y texturas característicos de esta región.</p>
-                    <p>En Cuncunul, no solo servimos comida; creamos momentos memorables en un ambiente acogedor y elegante, donde cada detalle ha sido cuidadosamente pensado para transportarte a un viaje sensorial por la rica cultura maya y yucateca.</p>
-                </div>
-                <div class="about-images">
-                    <img src="resources/aboutus.jpg" alt="Ingredientes frescos" class="about-img">
-                </div>
-            </div>
+      <div class="sobre-nosotros-contenido">
+        <h2>Sobre nosotros</h2>
+        <div class="about-flex-container">
+          <div class="about-text">
+            <p>
+              Cuncunul nace como un homenaje a la rica tradición culinaria de la
+              península de Yucatán, fusionando recetas ancestrales con técnicas
+              contemporáneas. Nos enorgullece ofrecer una experiencia
+              gastronómica auténtica que celebra los sabores, aromas y texturas
+              característicos de esta región.
+            </p>
+            <p>
+              En Cuncunul, no solo servimos comida; creamos momentos memorables
+              en un ambiente acogedor y elegante, donde cada detalle ha sido
+              cuidadosamente pensado para transportarte a un viaje sensorial por
+              la rica cultura maya y yucateca.
+            </p>
+          </div>
+          <div class="about-images">
+            <img
+              src="resources/aboutus.jpg"
+              alt="Ingredientes frescos"
+              class="about-img"
+            />
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Contacto -->
     <div class="contacto" id="contact">
-        <div class="contacto-contenido">
-            <div class="columna mapa">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.1234567890!2d-99.1234567890!3d19.1234567890!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1234567890abcdef!2sCuncunul!5e0!3m2!1ses!2smx!4v1234567890"
-                    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-            <div class="columna info">
-                <h2>Contacto</h2>
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <span class="contact-icon">📞</span>
-                        <p>+52 123 456 7890</p>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">✉️</span>
-                        <p>contacto@cuncunul.com</p>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">📅</span>
-                        <p>reservas@cuncunul.com</p>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">🕒</span>
-                        <p>Lunes a Domingo: 13:00 - 23:00</p>
-                    </div>
-                </div>
-            </div>
+      <div class="contacto-contenido">
+        <div class="columna mapa">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.1234567890!2d-99.1234567890!3d19.1234567890!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1234567890abcdef!2sCuncunul!5e0!3m2!1ses!2smx!4v1234567890"
+            width="100%"
+            height="300"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
         </div>
+        <div class="columna info">
+          <h2>Contacto</h2>
+          <div class="contact-details">
+            <div class="contact-item">
+              <span class="contact-icon">📞</span>
+              <p>+52 123 456 7890</p>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">✉️</span>
+              <p>contacto@cuncunul.com</p>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📅</span>
+              <p>reservas@cuncunul.com</p>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">🕒</span>
+              <p>Lunes a Domingo: 13:00 - 23:00</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Footer -->
     <footer>
-                <img src="resources/cero.ico" alt="Logo Cuncunul" class="header-logo">
+      <img src="resources/cero.ico" alt="Logo Cuncunul" class="header-logo" />
     </footer>
 
-</body>
+    <div data-key="AI Sales Chatbot" class="ft" id="ftmvu59kw"></div>
+    <script src="https://wdg.fouita.com/widgets/0x248ce6.js"></script>
+    
+  </body>
 
-<script>
+  <script>
     function scrollToSection(event, sectionId) {
-        event.preventDefault();
-        const section = document.getElementById(sectionId);
-        const navbarHeight = document.getElementById('navbar').offsetHeight;
-        const sectionTop = section.offsetTop - navbarHeight;
-        window.scrollTo({
-            top: sectionTop,
-            behavior: 'smooth'
-        });
+      event.preventDefault();
+      const section = document.getElementById(sectionId);
+      const navbarHeight = document.getElementById("navbar").offsetHeight;
+      const sectionTop = section.offsetTop - navbarHeight;
+      window.scrollTo({
+        top: sectionTop,
+        behavior: "smooth",
+      });
     }
 
     function loadMenu(event) {
-        event.preventDefault();
-        const menuContent = document.getElementById('menu-content');
+      event.preventDefault();
+      const menuContent = document.getElementById("menu-content");
 
-        if (!menuContent.innerHTML.trim()) { // Evita cargar el menú varias veces
-            fetch('menu.html')
-                .then(response => {
-                    if (!response.ok) throw new Error('Error al cargar el menú');
-                    return response.text();
-                })
-                .then(data => {
-                    menuContent.innerHTML = data;
-                    menuContent.scrollIntoView({ behavior: 'smooth' });
-                })
-                .catch(error => console.error(error));
-        } else {
-            menuContent.scrollIntoView({ behavior: 'smooth' });
-        }
+      if (!menuContent.innerHTML.trim()) {
+        // Evita cargar el menú varias veces
+        fetch("menu.html")
+          .then((response) => {
+            if (!response.ok) throw new Error("Error al cargar el menú");
+            return response.text();
+          })
+          .then((data) => {
+            menuContent.innerHTML = data;
+            menuContent.scrollIntoView({ behavior: "smooth" });
+          })
+          .catch((error) => console.error(error));
+      } else {
+        menuContent.scrollIntoView({ behavior: "smooth" });
+      }
     }
-</script>
-
+  </script>
 </html>
