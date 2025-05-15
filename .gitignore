@@ -1,0 +1,23 @@
+# Variables de entorno - NUNCA subir
+.env
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Cachés
+.cache/
+
+# Editor config
+.vscode/
+.idea/
+
+# Archivos sensibles
+config_local.php
