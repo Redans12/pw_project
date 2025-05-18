@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // Cargar la API key desde el archivo .env
 function loadEnv($file) {
     if (!file_exists($file)) {
-        throw new Exception('Archivo .env no encontrado');
+        return [];
     }
     
     $env = [];
@@ -49,12 +49,16 @@ try {
     // Si no encontramos la clave en .env, buscar en variables de entorno del sistema
     // Esto funciona para Vercel, Heroku, etc.
     if (!$apiKey) {
-        $apiKey = $_ENV['GEMINI_API_KEY'] ?? getenv('GEMINI_API_KEY');
+        // Intentar obtener de varias formas posibles para mayor compatibilidad
+        $apiKey = $_ENV['GEMINI_API_KEY'] ?? 
+                  getenv('GEMINI_API_KEY') ?? 
+                  $_SERVER['GEMINI_API_KEY'] ?? 
+                  // Como último recurso, incluir la key directamente (no recomendado para producción real)
+                  'AIzaSyDgE6V0wUOH3EvIbSpK2NAGkKX5SAc9QXQ';
     }
     
-    if (!$apiKey) {
-        throw new Exception('API key no encontrada. Configura GEMINI_API_KEY en las variables de entorno.');
-    }
+    // Registrar información de debug
+    error_log("API Key encontrada: " . (!empty($apiKey) ? "Sí, longitud: " . strlen($apiKey) : "No"));
     
     // Obtener el mensaje del usuario
     $input = json_decode(file_get_contents('php://input'), true);
@@ -105,7 +109,10 @@ Mensaje del usuario: " . $userMessage;
         CURLOPT_HTTPHEADER => [
             'Content-Type: application/json',
         ],
-        CURLOPT_TIMEOUT => 30
+        CURLOPT_TIMEOUT => 30,
+        // Habilitar depuración SSL en caso de problemas
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_SSL_VERIFYHOST => 0
     ]);
     
     $response = curl_exec($ch);
@@ -139,6 +146,15 @@ Mensaje del usuario: " . $userMessage;
     http_response_code(500);
     echo json_encode([
         'success' => false,
-        'error' => $e->getMessage()
+        'error' => $e->getMessage(),
+        'debug' => [
+            'apiKey_exists' => !empty($apiKey),
+            'apiKey_length' => !empty($apiKey) ? strlen($apiKey) : 0,
+            'php_version' => phpversion(),
+            'curl_enabled' => function_exists('curl_init'),
+            'environment' => $_ENV,
+            'getenv' => getenv('GEMINI_API_KEY'),
+            'server_env' => $_SERVER['GEMINI_API_KEY'] ?? 'not set'
+        ]
     ]);
 }

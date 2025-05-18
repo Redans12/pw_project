@@ -142,6 +142,7 @@ class CuncunulChat {
         this.showTypingIndicator();
         
         try {
+            console.log("Enviando mensaje a:", this.apiEndpoint);
             // Enviar a la API
             const response = await fetch(this.apiEndpoint, {
                 method: 'POST',
@@ -152,6 +153,7 @@ class CuncunulChat {
             });
             
             const data = await response.json();
+            console.log("Respuesta recibida:", data);
             
             // Remover indicador de carga
             this.hideTypingIndicator();
@@ -159,14 +161,18 @@ class CuncunulChat {
             if (data.success) {
                 this.addMessage('assistant', data.message);
             } else {
-                this.addMessage('assistant', 'Lo siento, ocurrió un error. Por favor intenta de nuevo en un momento.');
-                console.error('Error del chat:', data.error);
+                let errorMessage = 'Lo siento, ocurrió un error. ';
+                if (data.error) {
+                    errorMessage += 'Detalles: ' + data.error;
+                    console.error('Error detallado:', data.error, data.debug || {});
+                }
+                this.addMessage('assistant', errorMessage);
             }
             
         } catch (error) {
             this.hideTypingIndicator();
-            this.addMessage('assistant', 'Lo siento, no pude conectar con el servidor. Por favor verifica tu conexión.');
-            console.error('Error del chat:', error);
+            console.error('Error completo:', error);
+            this.addMessage('assistant', 'Lo siento, no pude conectar con el servidor. Por favor verifica tu conexión. ' + (error.message || ''));
         }
     }
     
