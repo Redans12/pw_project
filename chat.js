@@ -4,7 +4,7 @@ class CuncunulChat {
         this.isMinimized = false;
         this.isOpen = false;
         this.messages = [];
-        this.apiEndpoint = 'chat_api.php';
+        this.apiEndpoint = '/api/chat';
         
         this.init();
     }
