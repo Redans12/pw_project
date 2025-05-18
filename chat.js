@@ -4,7 +4,13 @@ class CuncunulChat {
         this.isMinimized = false;
         this.isOpen = false;
         this.messages = [];
-        this.apiEndpoint = '/api/chat';
+        
+        // Configurar endpoint de API dependiendo del entorno
+        this.apiEndpoint = window.location.hostname.includes('vercel.app') 
+            ? '/api/chat' 
+            : '/api/chat_api.php';
+        
+        console.log("API endpoint configurado:", this.apiEndpoint);
         
         this.init();
     }
@@ -143,30 +149,49 @@ class CuncunulChat {
         
         try {
             console.log("Enviando mensaje a:", this.apiEndpoint);
+            
             // Enviar a la API
             const response = await fetch(this.apiEndpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({ message: message })
             });
             
-            const data = await response.json();
-            console.log("Respuesta recibida:", data);
+            // Imprimir respuesta bruta para depuración
+            const responseText = await response.text();
+            console.log("Respuesta bruta:", responseText);
             
             // Remover indicador de carga
             this.hideTypingIndicator();
             
-            if (data.success) {
-                this.addMessage('assistant', data.message);
-            } else {
-                let errorMessage = 'Lo siento, ocurrió un error. ';
-                if (data.error) {
-                    errorMessage += 'Detalles: ' + data.error;
-                    console.error('Error detallado:', data.error, data.debug || {});
+            // Intentar parsear la respuesta como JSON
+            let data;
+            try {
+                data = JSON.parse(responseText);
+                console.log("Respuesta parseada:", data);
+                
+                if (data.success) {
+                    this.addMessage('assistant', data.message);
+                } else {
+                    let errorMessage = 'Lo siento, ocurrió un error. ';
+                    if (data.error) {
+                        errorMessage += 'Detalles: ' + data.error;
+                        console.error('Error detallado:', data.error, data.debug || {});
+                    }
+                    this.addMessage('assistant', errorMessage);
                 }
-                this.addMessage('assistant', errorMessage);
+            } catch (parseError) {
+                console.error('Error al parsear JSON:', parseError);
+                // Si no es JSON válido, mostrar un mensaje de respuesta del servidor
+                if (responseText.includes('<!DOCTYPE html>')) {
+                    // Es una página HTML, probablemente un error 500
+                    this.addMessage('assistant', 'Error del servidor: Se recibió una respuesta HTML en lugar de JSON. Verifica la configuración del servidor.');
+                } else {
+                    this.addMessage('assistant', 'Error de comunicación con el servidor. Respuesta no válida.');
+                }
             }
             
         } catch (error) {
