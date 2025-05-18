@@ -54,6 +54,7 @@ if ($reserva_id > 0 && $conn->connect_error == false) {
     <link rel="icon" href="resources/cero.ico" type="image/x-icon" />
     <link rel="stylesheet" href="restaurantStyle.css">
     <link rel="stylesheet" href="notification.css">
+    <link rel="stylesheet" href="chat.css">
     <script src="ajax_handler.js"></script>
     <style>
         body {
@@ -234,5 +235,6 @@ if ($reserva_id > 0 && $conn->connect_error == false) {
     <footer>
         <img src="resources/cero.ico" alt="Logo Cuncunul" class="header-logo">
     </footer>
+    <script src="chat.js"></script>
 </body>
 </html>

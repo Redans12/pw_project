@@ -31,7 +31,7 @@ $user_name = $_SESSION['user_name'];
     <link rel="stylesheet" href="restaurantStyle.css">
     <link rel="stylesheet" href="reservacionStyle.css">
     <link rel="stylesheet" href="notification.css">
-    
+    <link rel="stylesheet" href="chat.css">
     <!-- Script de Ajax -->
     <script src="ajax_handler.js"></script>
 </head>
@@ -124,32 +124,32 @@ $user_name = $_SESSION['user_name'];
             const yyyy = today.getFullYear();
             let mm = today.getMonth() + 1;
             let dd = today.getDate();
-            
+
             if (dd < 10) dd = '0' + dd;
             if (mm < 10) mm = '0' + mm;
-            
+
             const formattedToday = yyyy + '-' + mm + '-' + dd;
             document.getElementById('fecha').min = formattedToday;
         });
-        
+
         // Manejar envío del formulario de reservación con AJAX
         document.getElementById('reservation-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             // Agregar clase de carga
             this.classList.add('form-loading');
-            
+
             const fecha = document.getElementById('fecha').value;
             const hora = document.getElementById('hora').value;
             const personas = document.getElementById('personas').value;
             const telefono = document.getElementById('telefono').value;
             const comentarios = document.getElementById('comentarios').value;
-            
+
             // Función para manejar la respuesta exitosa
             function reservationSuccess(response) {
                 // Quitar clase de carga
                 document.getElementById('reservation-form').classList.remove('form-loading');
-                
+
                 if (response.success) {
                     showNotification(response.message, 'success');
                     // Redireccionar después de un breve retraso
@@ -160,14 +160,14 @@ $user_name = $_SESSION['user_name'];
                     showNotification(response.message, 'error');
                 }
             }
-            
+
             // Función para manejar errores
             function reservationError(errorMsg) {
                 // Quitar clase de carga
                 document.getElementById('reservation-form').classList.remove('form-loading');
                 showNotification('Error: ' + errorMsg, 'error');
             }
-            
+
             // Realizar petición AJAX
             processReservation(fecha, hora, personas, telefono, comentarios, reservationSuccess, reservationError);
         });
@@ -181,5 +181,7 @@ $user_name = $_SESSION['user_name'];
             };
         })();
     </script>
+    <script src="chat.js"></script>
 </body>
+
 </html>

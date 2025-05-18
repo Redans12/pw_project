@@ -32,7 +32,7 @@ $result = $conn->query($sql);
 // Preparar array para almacenar las reservaciones
 $reservaciones = [];
 if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         $reservaciones[] = $row;
     }
 }
@@ -58,7 +58,7 @@ $conn->close();
 
     <link rel="stylesheet" href="restaurantStyle.css">
     <link rel="stylesheet" href="notification.css">
-    
+    <link rel="stylesheet" href="chat.css">
     <style>
         .mis-reservaciones-container {
             width: 90%;
@@ -70,12 +70,12 @@ $conn->close();
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-        
+
         .mis-reservaciones-header {
             text-align: center;
             margin-bottom: 30px;
         }
-        
+
         .mis-reservaciones-header h2 {
             font-size: 2.2rem;
             font-family: 'Kurale', serif;
@@ -84,7 +84,7 @@ $conn->close();
             display: inline-block;
             margin-bottom: 20px;
         }
-        
+
         .mis-reservaciones-header h2:after {
             content: '';
             position: absolute;
@@ -95,14 +95,14 @@ $conn->close();
             height: 3px;
             background-color: #e3ba7e;
         }
-        
+
         .welcome-message {
             text-align: center;
             margin-bottom: 30px;
             font-family: 'Raleway', sans-serif;
             color: white;
         }
-        
+
         .reservacion-card {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
@@ -111,30 +111,30 @@ $conn->close();
             transition: all 0.3s ease;
             border-left: 4px solid #e3ba7e;
         }
-        
+
         .reservacion-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
         }
-        
+
         .reservacion-fecha {
             font-family: 'Kurale', serif;
             font-size: 1.4rem;
             color: #e3ba7e;
             margin-bottom: 10px;
         }
-        
+
         .reservacion-detalles {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
         }
-        
+
         .reservacion-dato {
             flex: 1;
             min-width: 200px;
         }
-        
+
         .reservacion-dato strong {
             display: block;
             margin-bottom: 5px;
@@ -142,18 +142,18 @@ $conn->close();
             font-size: 0.9rem;
             text-transform: uppercase;
         }
-        
+
         .reservacion-dato span {
             font-size: 1.1rem;
             color: white;
         }
-        
+
         .reservacion-acciones {
             margin-top: 15px;
             display: flex;
             gap: 10px;
         }
-        
+
         .btn-accion {
             padding: 8px 15px;
             border: 1px solid white;
@@ -168,32 +168,32 @@ $conn->close();
             align-items: center;
             justify-content: center;
         }
-        
+
         .btn-editar {
             border-color: #e3ba7e;
             color: #e3ba7e;
         }
-        
+
         .btn-cancelar {
             border-color: #ff6b6b;
             color: #ff6b6b;
         }
-        
+
         .btn-accion:hover {
             background: white;
             color: #7e2108;
         }
-        
+
         .btn-editar:hover {
             background: #e3ba7e;
             color: white;
         }
-        
+
         .btn-cancelar:hover {
             background: #ff6b6b;
             color: white;
         }
-        
+
         .no-reservaciones {
             text-align: center;
             padding: 30px;
@@ -201,7 +201,7 @@ $conn->close();
             color: white;
             font-size: 1.2rem;
         }
-        
+
         .btn-nueva-reservacion {
             display: block;
             width: 100%;
@@ -219,24 +219,24 @@ $conn->close();
             transition: all 0.3s ease;
             text-decoration: none;
         }
-        
+
         .btn-nueva-reservacion:hover {
             background: white;
             color: #7e2108;
         }
-        
+
         @media screen and (max-width: 768px) {
             .reservacion-detalles {
                 flex-direction: column;
                 gap: 10px;
             }
-            
+
             .reservacion-dato {
                 min-width: 100%;
             }
         }
     </style>
-    
+
     <!-- Script de Ajax -->
     <script src="ajax_handler.js"></script>
 </head>
@@ -272,9 +272,9 @@ $conn->close();
             <?php foreach ($reservaciones as $reserva): ?>
                 <div class="reservacion-card" data-id="<?php echo $reserva['id']; ?>">
                     <div class="reservacion-fecha">
-                        <?php 
-                            $fecha = new DateTime($reserva['fecha']);
-                            echo $fecha->format('d/m/Y'); 
+                        <?php
+                        $fecha = new DateTime($reserva['fecha']);
+                        echo $fecha->format('d/m/Y');
                         ?>
                     </div>
                     <div class="reservacion-detalles">
@@ -287,17 +287,17 @@ $conn->close();
                             <span><?php echo htmlspecialchars($reserva['num_personas']); ?></span>
                         </div>
                         <?php if (!empty($reserva['comentarios'])): ?>
-                        <div class="reservacion-dato">
-                            <strong>Comentarios</strong>
-                            <span><?php echo htmlspecialchars($reserva['comentarios']); ?></span>
-                        </div>
+                            <div class="reservacion-dato">
+                                <strong>Comentarios</strong>
+                                <span><?php echo htmlspecialchars($reserva['comentarios']); ?></span>
+                            </div>
                         <?php endif; ?>
                         <div class="reservacion-dato">
                             <strong>Fecha de Reservación</strong>
                             <span>
-                                <?php 
-                                    $fecha_creacion = new DateTime($reserva['fecha_creacion']);
-                                    echo $fecha_creacion->format('d/m/Y H:i'); 
+                                <?php
+                                $fecha_creacion = new DateTime($reserva['fecha_creacion']);
+                                echo $fecha_creacion->format('d/m/Y H:i');
                                 ?>
                             </span>
                         </div>
@@ -327,7 +327,7 @@ $conn->close();
         function editarReservacion(reservacionId) {
             window.location.href = `editar_reservacion.php?id=${reservacionId}`;
         }
-        
+
         // Función para cancelar una reservación
         function cancelarReservacion(reservacionId) {
             if (confirm('¿Estás seguro de que deseas cancelar esta reservación?')) {
@@ -336,12 +336,12 @@ $conn->close();
                 xhr.open('POST', 'ajax_cancelar_reservacion.php', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-                
+
                 xhr.onload = function() {
                     if (xhr.status >= 200 && xhr.status < 300) {
                         try {
                             const response = JSON.parse(xhr.responseText);
-                            
+
                             if (response.success) {
                                 showNotification(response.message, 'success');
                                 // Eliminar la tarjeta de reservación del DOM
@@ -349,7 +349,7 @@ $conn->close();
                                 if (reservacionCard) {
                                     reservacionCard.remove();
                                 }
-                                
+
                                 // Si no quedan reservaciones, mostrar mensaje
                                 const tarjetas = document.querySelectorAll('.reservacion-card');
                                 if (tarjetas.length === 0) {
@@ -357,7 +357,7 @@ $conn->close();
                                     const noReservaciones = document.createElement('div');
                                     noReservaciones.className = 'no-reservaciones';
                                     noReservaciones.innerHTML = '<p>No tienes reservaciones activas.</p>';
-                                    
+
                                     // Insertar antes del botón de nueva reservación
                                     const btnNueva = document.querySelector('.btn-nueva-reservacion');
                                     contenedor.insertBefore(noReservaciones, btnNueva);
@@ -372,14 +372,16 @@ $conn->close();
                         showNotification('Error de conexión', 'error');
                     }
                 };
-                
+
                 xhr.onerror = function() {
                     showNotification('Error de conexión', 'error');
                 };
-                
+
                 xhr.send(`id=${reservacionId}`);
             }
         }
     </script>
+    <script src="chat.js"></script>
 </body>
+
 </html>

@@ -38,11 +38,22 @@ function loadEnv($file) {
 
 try {
     // Cargar variables de entorno
-    $env = loadEnv(__DIR__ . '/.env');
-    $apiKey = $env['GEMINI_API_KEY'] ?? null;
+    // Primero intentar desde archivo .env (desarrollo local)
+    $apiKey = null;
+    
+    if (file_exists(__DIR__ . '/.env')) {
+        $env = loadEnv(__DIR__ . '/.env');
+        $apiKey = $env['GEMINI_API_KEY'] ?? null;
+    }
+    
+    // Si no encontramos la clave en .env, buscar en variables de entorno del sistema
+    // Esto funciona para Vercel, Heroku, etc.
+    if (!$apiKey) {
+        $apiKey = $_ENV['GEMINI_API_KEY'] ?? getenv('GEMINI_API_KEY');
+    }
     
     if (!$apiKey) {
-        throw new Exception('API key no encontrada en el archivo .env');
+        throw new Exception('API key no encontrada. Configura GEMINI_API_KEY en las variables de entorno.');
     }
     
     // Obtener el mensaje del usuario

@@ -67,7 +67,7 @@ $conn->close();
     <link rel="stylesheet" href="restaurantStyle.css">
     <link rel="stylesheet" href="reservacionStyle.css">
     <link rel="stylesheet" href="notification.css">
-    
+    <link rel="stylesheet" href="chat.css">
     <!-- Script de Ajax -->
     <script src="ajax_handler.js"></script>
 </head>
@@ -101,7 +101,7 @@ $conn->close();
 
         <form id="edit-reservation-form">
             <input type="hidden" id="reservacion-id" value="<?php echo $reservacion_id; ?>">
-            
+
             <div class="form-row">
                 <div class="form-column">
                     <div class="form-group">
@@ -160,28 +160,28 @@ $conn->close();
             const yyyy = today.getFullYear();
             let mm = today.getMonth() + 1;
             let dd = today.getDate();
-            
+
             if (dd < 10) dd = '0' + dd;
             if (mm < 10) mm = '0' + mm;
-            
+
             const formattedToday = yyyy + '-' + mm + '-' + dd;
             document.getElementById('fecha').min = formattedToday;
         });
-        
+
         // Manejar envío del formulario de edición con AJAX
         document.getElementById('edit-reservation-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             // Agregar clase de carga
             this.classList.add('form-loading');
-            
+
             const reservacionId = document.getElementById('reservacion-id').value;
             const fecha = document.getElementById('fecha').value;
             const hora = document.getElementById('hora').value;
             const personas = document.getElementById('personas').value;
             const telefono = document.getElementById('telefono').value;
             const comentarios = document.getElementById('comentarios').value;
-            
+
             // Crear objeto FormData para enviar
             const formData = new FormData();
             formData.append('id', reservacionId);
@@ -190,26 +190,26 @@ $conn->close();
             formData.append('personas', personas);
             formData.append('telefono', telefono);
             formData.append('comentarios', comentarios);
-            
+
             // Convertir a URL-encoded
             const data = Array.from(formData.entries())
                 .map(pair => encodeURIComponent(pair[0]) + '=' + encodeURIComponent(pair[1]))
                 .join('&');
-            
+
             // Crear y configurar la solicitud XHR
             const xhr = new XMLHttpRequest();
             xhr.open('POST', 'ajax_editar_reservacion.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            
+
             xhr.onload = function() {
                 // Quitar clase de carga
                 document.getElementById('edit-reservation-form').classList.remove('form-loading');
-                
+
                 if (xhr.status >= 200 && xhr.status < 300) {
                     try {
                         const response = JSON.parse(xhr.responseText);
-                        
+
                         if (response.success) {
                             showNotification(response.message, 'success');
                             // Redireccionar después de un breve retraso
@@ -226,15 +226,17 @@ $conn->close();
                     showNotification('Error de conexión', 'error');
                 }
             };
-            
+
             xhr.onerror = function() {
                 // Quitar clase de carga
                 document.getElementById('edit-reservation-form').classList.remove('form-loading');
                 showNotification('Error de conexión', 'error');
             };
-            
+
             xhr.send(data);
         });
     </script>
+    <script src="chat.js"></script>
 </body>
+
 </html>
