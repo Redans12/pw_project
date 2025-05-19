@@ -1,6 +1,11 @@
 <?php
-// Iniciar sesión
+// Depuración de sesión
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
+error_log("Sesión actual en reservacion.php: " . print_r($_SESSION, true));
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['user_id'])) {
@@ -139,6 +144,7 @@ $user_name = $_SESSION['user_name'];
         });
 
         // Manejar envío del formulario de reservación con AJAX
+        // Manejar envío del formulario de reservación con AJAX directo
         document.getElementById('reservation-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -151,31 +157,67 @@ $user_name = $_SESSION['user_name'];
             const telefono = document.getElementById('telefono').value;
             const comentarios = document.getElementById('comentarios').value;
 
-            // Función para manejar la respuesta exitosa
-            function reservationSuccess(response) {
+            // Validación básica
+            if (!fecha || !hora || !personas || !telefono) {
+                showNotification('Por favor complete todos los campos requeridos', 'error');
+                this.classList.remove('form-loading');
+                return;
+            }
+
+            // Crear y configurar la solicitud XHR
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'ajax_process_reservation.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+            xhr.onload = function() {
                 // Quitar clase de carga
                 document.getElementById('reservation-form').classList.remove('form-loading');
 
-                if (response.success) {
-                    showNotification(response.message, 'success');
-                    // Redireccionar después de un breve retraso
-                    setTimeout(function() {
-                        window.location.href = response.redirect;
-                    }, 1000);
+                console.log("Respuesta recibida:", xhr.responseText);
+
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+
+                        if (response.success) {
+                            showNotification(response.message, 'success');
+                            // Redireccionar después de un breve retraso
+                            setTimeout(function() {
+                                window.location.href = response.redirect;
+                            }, 1000);
+                        } else {
+                            showNotification(response.message, 'error');
+                            console.error("Error del servidor:", response);
+                        }
+                    } catch (e) {
+                        console.error("Error al procesar respuesta JSON:", e);
+                        console.log("Respuesta recibida:", xhr.responseText);
+                        showNotification('Error al procesar la respuesta del servidor', 'error');
+                    }
                 } else {
-                    showNotification(response.message, 'error');
+                    showNotification('Error de conexión al servidor', 'error');
                 }
-            }
+            };
 
-            // Función para manejar errores
-            function reservationError(errorMsg) {
+            xhr.onerror = function() {
                 // Quitar clase de carga
                 document.getElementById('reservation-form').classList.remove('form-loading');
-                showNotification('Error: ' + errorMsg, 'error');
-            }
+                showNotification('Error de conexión', 'error');
+            };
 
-            // Realizar petición AJAX
-            processReservation(fecha, hora, personas, telefono, comentarios, reservationSuccess, reservationError);
+            // Preparar datos
+            const formData =
+                'fecha=' + encodeURIComponent(fecha) +
+                '&hora=' + encodeURIComponent(hora) +
+                '&personas=' + encodeURIComponent(personas) +
+                '&telefono=' + encodeURIComponent(telefono) +
+                '&comentarios=' + encodeURIComponent(comentarios);
+
+            console.log("Enviando datos:", formData);
+
+            // Enviar solicitud
+            xhr.send(formData);
         });
 
         // Agregar el header X-Requested-With a todas las solicitudes XHR para identificarlas como AJAX
