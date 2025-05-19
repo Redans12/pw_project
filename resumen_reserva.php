@@ -7,6 +7,12 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['reserva'])) {
     exit();
 }
 
+// Verificar si el usuario ha verificado su cuenta
+if (!isset($_SESSION['verificado']) || $_SESSION['verificado'] != 1) {
+    header("Location: verificar.php");
+    exit();
+}
+
 // Obtener datos de la reserva
 $reserva = $_SESSION['reserva'];
 $usuario = $_SESSION['user_name'];
@@ -227,6 +233,7 @@ if ($reserva_id > 0 && $conn->connect_error == false) {
             <?php endif; ?>
         </div>
         
+        <a href="mis_reservaciones.php" class="btn-action">Ver mis reservaciones</a>
         <a href="index.html" class="btn-action">Volver al inicio</a>
         <a href="logout.php" class="btn-action btn-logout">Cerrar sesión</a>
     </div>

@@ -8,6 +8,12 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+// Verificar si el usuario ha verificado su cuenta
+if (!isset($_SESSION['verificado']) || $_SESSION['verificado'] != 1) {
+    header("Location: verificar.php");
+    exit();
+}
+
 // Verificar si se proporcionó el ID de reservación
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     header("Location: mis_reservaciones.php");

@@ -33,7 +33,11 @@ $sql = "CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
+    telefono VARCHAR(20) NULL,
     password VARCHAR(255) NOT NULL,
+    verificado TINYINT(1) DEFAULT 0,
+    codigo_verificacion VARCHAR(10) NULL,
+    expiracion_codigo DATETIME NULL,
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
     ultima_sesion DATETIME DEFAULT CURRENT_TIMESTAMP
 )";
@@ -44,6 +48,22 @@ if ($conn->query($sql) === TRUE) {
     echo "<p style='color:red'>Error al crear la tabla 'usuarios': " . $conn->error . "</p>";
 }
 
+// Verificar si necesitamos actualizar la tabla usuarios para incluir los campos de verificación
+$result = $conn->query("SHOW COLUMNS FROM usuarios LIKE 'verificado'");
+if ($result->num_rows == 0) {
+    $alter_sql = "ALTER TABLE usuarios 
+                 ADD COLUMN verificado TINYINT(1) DEFAULT 0,
+                 ADD COLUMN codigo_verificacion VARCHAR(10) NULL,
+                 ADD COLUMN expiracion_codigo DATETIME NULL,
+                 ADD COLUMN telefono VARCHAR(20) NULL";
+    
+    if ($conn->query($alter_sql) === TRUE) {
+        echo "<p style='color:green'>Tabla 'usuarios' actualizada con campos de verificación.</p>";
+    } else {
+        echo "<p style='color:red'>Error al actualizar la tabla 'usuarios': " . $conn->error . "</p>";
+    }
+}
+
 // Crear la tabla de reservaciones si no existe
 $sql = "CREATE TABLE IF NOT EXISTS reservaciones (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -51,6 +71,7 @@ $sql = "CREATE TABLE IF NOT EXISTS reservaciones (
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
     num_personas INT NOT NULL,
+    telefono VARCHAR(20) NULL,
     comentarios TEXT,
     fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
@@ -60,6 +81,18 @@ if ($conn->query($sql) === TRUE) {
     echo "<p style='color:green'>Tabla 'reservaciones' creada o ya existente.</p>";
 } else {
     echo "<p style='color:red'>Error al crear la tabla 'reservaciones': " . $conn->error . "</p>";
+}
+
+// Verificar si necesitamos actualizar la tabla reservaciones para incluir el campo de teléfono
+$result = $conn->query("SHOW COLUMNS FROM reservaciones LIKE 'telefono'");
+if ($result->num_rows == 0) {
+    $alter_sql = "ALTER TABLE reservaciones ADD COLUMN telefono VARCHAR(20) NULL AFTER num_personas";
+    
+    if ($conn->query($alter_sql) === TRUE) {
+        echo "<p style='color:green'>Tabla 'reservaciones' actualizada con campo de teléfono.</p>";
+    } else {
+        echo "<p style='color:red'>Error al actualizar la tabla 'reservaciones': " . $conn->error . "</p>";
+    }
 }
 
 // Mostrar las tablas existentes

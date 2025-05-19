@@ -54,7 +54,11 @@ if ($check_table->num_rows == 0) {
         id INT AUTO_INCREMENT PRIMARY KEY,
         nombre VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
+        telefono VARCHAR(20) NULL,
         password VARCHAR(255) NOT NULL,
+        verificado TINYINT(1) DEFAULT 0,
+        codigo_verificacion VARCHAR(10) NULL,
+        expiracion_codigo DATETIME NULL,
         fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
         ultima_sesion DATETIME DEFAULT CURRENT_TIMESTAMP
     )";
@@ -75,6 +79,7 @@ $nombre = isset($_POST['name']) ? $conn->real_escape_string($_POST['name']) : ''
 $email = isset($_POST['email']) ? $conn->real_escape_string($_POST['email']) : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
 $confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
+$telefono = isset($_POST['telefono']) ? $conn->real_escape_string($_POST['telefono']) : '';
 
 // Validación de datos
 if (empty($nombre) || empty($email) || empty($password) || empty($confirm_password)) {
@@ -109,25 +114,31 @@ if ($result->num_rows > 0) {
     exit();
 }
 
+// Generar código de verificación aleatorio
+$codigo_verificacion = mt_rand(100000, 999999); // Código de 6 dígitos
+$expiracion = date('Y-m-d H:i:s', strtotime('+24 hours')); // Expira en 24 horas
+
 // Encriptar contraseña
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-// Insertar nuevo usuario
-$sql = "INSERT INTO usuarios (nombre, email, password, fecha_registro, ultima_sesion) 
-        VALUES ('$nombre', '$email', '$hashed_password', NOW(), NOW())";
+// Insertar nuevo usuario con código de verificación
+$sql = "INSERT INTO usuarios (nombre, email, telefono, password, codigo_verificacion, expiracion_codigo, fecha_registro, ultima_sesion) 
+        VALUES ('$nombre', '$email', '$telefono', '$hashed_password', '$codigo_verificacion', '$expiracion', NOW(), NOW())";
 
 if ($conn->query($sql) === TRUE) {
     // Iniciar sesión automáticamente
     $_SESSION['user_id'] = $conn->insert_id;
     $_SESSION['user_name'] = $nombre;
     $_SESSION['user_email'] = $email;
+    $_SESSION['verificado'] = 0; // Usuario no verificado
     
     error_log("Usuario registrado con éxito: " . $nombre);
     
     $response = [
         'success' => true,
-        'message' => 'Registro exitoso',
-        'redirect' => 'reservacion.php'
+        'message' => 'Registro exitoso. Por favor verifica tu cuenta con el código: ' . $codigo_verificacion,
+        'redirect' => 'verificar.php',
+        'codigo' => $codigo_verificacion // Incluir el código en la respuesta
     ];
 } else {
     error_log("Error al registrar: " . $conn->error);
