@@ -2,18 +2,38 @@
 // Habilitar CORS para JavaScript
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, X-Requested-With');
 
 // Verificar si es una petición OPTIONS (preflight)
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
+// Habilitar visualización de errores para debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Log para debugging
+error_log("Solicitud de chat recibida");
+
 // Verificar si es una petición POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(['error' => 'Método no permitido']);
+    echo json_encode(['success' => false, 'error' => 'Método no permitido']);
+    exit;
+}
+
+// Obtener el contenido raw del cuerpo de la petición
+$input_data = file_get_contents('php://input');
+error_log("Datos recibidos: " . $input_data);
+
+// Intentar decodificar JSON
+$input = json_decode($input_data, true);
+if (json_last_error() !== JSON_ERROR_NONE) {
+    error_log("Error al decodificar JSON: " . json_last_error_msg());
+    echo json_encode(['success' => false, 'error' => 'Error al procesar los datos: ' . json_last_error_msg()]);
     exit;
 }
 
@@ -37,35 +57,37 @@ function loadEnv($file) {
 }
 
 try {
-    // Cargar variables de entorno
-    // Primero intentar desde archivo .env (desarrollo local)
-    $apiKey = null;
-    
-    if (file_exists(__DIR__ . '/.env')) {
-        $env = loadEnv(__DIR__ . '/.env');
-        $apiKey = $env['GEMINI_API_KEY'] ?? null;
-    }
-    
-    // Si no encontramos la clave en .env, buscar en variables de entorno del sistema
-    // Esto funciona para Vercel, Heroku, etc.
-    if (!$apiKey) {
-        // Intentar obtener de varias formas posibles para mayor compatibilidad
-        $apiKey = $_ENV['GEMINI_API_KEY'] ?? 
-                  getenv('GEMINI_API_KEY') ?? 
-                  $_SERVER['GEMINI_API_KEY'] ?? 
-                  // Como último recurso, incluir la key directamente (no recomendado para producción real)
-                  'AIzaSyDgE6V0wUOH3EvIbSpK2NAGkKX5SAc9QXQ';
-    }
-    
-    // Registrar información de debug
-    error_log("API Key encontrada: " . (!empty($apiKey) ? "Sí, longitud: " . strlen($apiKey) : "No"));
-    
     // Obtener el mensaje del usuario
-    $input = json_decode(file_get_contents('php://input'), true);
-    $userMessage = $input['message'] ?? '';
+    $userMessage = isset($input['message']) ? trim($input['message']) : '';
     
     if (empty($userMessage)) {
         throw new Exception('Mensaje vacío');
+    }
+    
+    // Usar una API key hardcodeada para desarrollo local 
+    // (no recomendado para producción, pero útil para pruebas)
+    $apiKey = 'AIzaSyDgE6V0wUOH3EvIbSpK2NAGkKX5SAc9QXQ';
+    
+    // También intentar cargar desde .env si existe
+    $envFilePaths = [
+        __DIR__ . '/.env',
+        __DIR__ . '/../.env',
+        dirname(__DIR__) . '/.env'
+    ];
+    
+    foreach ($envFilePaths as $envFile) {
+        if (file_exists($envFile)) {
+            $env = loadEnv($envFile);
+            if (isset($env['GEMINI_API_KEY']) && !empty($env['GEMINI_API_KEY'])) {
+                $apiKey = $env['GEMINI_API_KEY'];
+                break;
+            }
+        }
+    }
+    
+    // También buscar en variables de entorno del sistema
+    if (getenv('GEMINI_API_KEY')) {
+        $apiKey = getenv('GEMINI_API_KEY');
     }
     
     // Configurar el contexto del restaurante
@@ -99,18 +121,22 @@ Mensaje del usuario: " . $userMessage;
         ]
     ];
     
+    $jsonData = json_encode($data);
+    error_log("Enviando a Gemini: " . $jsonData);
+    
     // Realizar la petición cURL
     $ch = curl_init();
     curl_setopt_array($ch, [
         CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => json_encode($data),
+        CURLOPT_POSTFIELDS => $jsonData,
         CURLOPT_HTTPHEADER => [
             'Content-Type: application/json',
+            'Content-Length: ' . strlen($jsonData)
         ],
         CURLOPT_TIMEOUT => 30,
-        // Habilitar depuración SSL en caso de problemas
+        // Deshabilitar verificación SSL para entornos de desarrollo
         CURLOPT_SSL_VERIFYPEER => false,
         CURLOPT_SSL_VERIFYHOST => 0
     ]);
@@ -118,31 +144,39 @@ Mensaje del usuario: " . $userMessage;
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     
+    // Log de la respuesta
+    error_log("Respuesta de Gemini (HTTP $httpCode): " . $response);
+    
     if (curl_errno($ch)) {
         throw new Exception('Error cURL: ' . curl_error($ch));
     }
     
     curl_close($ch);
     
+    // Si hay error HTTP
     if ($httpCode !== 200) {
-        throw new Exception('Error HTTP: ' . $httpCode . ' - ' . $response);
+        throw new Exception('Error HTTP al contactar Gemini API: ' . $httpCode . ' - ' . $response);
     }
     
     $responseData = json_decode($response, true);
     
+    // Verificar si la estructura es la esperada
     if (!$responseData || !isset($responseData['candidates'][0]['content']['parts'][0]['text'])) {
-        throw new Exception('Respuesta inválida de la API');
+        throw new Exception('Respuesta inválida o inesperada de la API de Gemini');
     }
     
     $aiResponse = $responseData['candidates'][0]['content']['parts'][0]['text'];
     
-    // Devolver la respuesta
+    // Devolver la respuesta exitosa
     echo json_encode([
         'success' => true,
         'message' => $aiResponse
     ]);
     
 } catch (Exception $e) {
+    error_log("Error en el chat API: " . $e->getMessage());
+    
+    // Devolver error
     http_response_code(500);
     echo json_encode([
         'success' => false,
@@ -152,9 +186,6 @@ Mensaje del usuario: " . $userMessage;
             'apiKey_length' => !empty($apiKey) ? strlen($apiKey) : 0,
             'php_version' => phpversion(),
             'curl_enabled' => function_exists('curl_init'),
-            'environment' => $_ENV,
-            'getenv' => getenv('GEMINI_API_KEY'),
-            'server_env' => $_SERVER['GEMINI_API_KEY'] ?? 'not set'
         ]
     ]);
 }
