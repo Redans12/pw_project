@@ -145,10 +145,10 @@ $user_name = $_SESSION['user_name'];
 
         // Manejar envío del formulario de reservación con AJAX
         // Manejar envío del formulario de reservación con AJAX directo
+        // Manejar envío del formulario de reservación con AJAX
+        // Manejar envío del formulario de reservación usando ajax_handler.js
         document.getElementById('reservation-form').addEventListener('submit', function(e) {
             e.preventDefault();
-
-            // Agregar clase de carga
             this.classList.add('form-loading');
 
             const fecha = document.getElementById('fecha').value;
@@ -157,68 +157,36 @@ $user_name = $_SESSION['user_name'];
             const telefono = document.getElementById('telefono').value;
             const comentarios = document.getElementById('comentarios').value;
 
-            // Validación básica
-            if (!fecha || !hora || !personas || !telefono) {
-                showNotification('Por favor complete todos los campos requeridos', 'error');
-                this.classList.remove('form-loading');
-                return;
-            }
+            // Crear objeto con los datos
+            const data = {
+                fecha: fecha,
+                hora: hora,
+                personas: personas,
+                telefono: telefono,
+                comentarios: comentarios
+            };
 
-            // Crear y configurar la solicitud XHR
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'ajax_process_reservation.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            // Usar la función de ajax_handler.js
+            processReservation(fecha, hora, personas, telefono, comentarios,
+                function(response) {
+                    document.getElementById('reservation-form').classList.remove('form-loading');
 
-            xhr.onload = function() {
-                // Quitar clase de carga
-                document.getElementById('reservation-form').classList.remove('form-loading');
-
-                console.log("Respuesta recibida:", xhr.responseText);
-
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    try {
-                        const response = JSON.parse(xhr.responseText);
-
-                        if (response.success) {
-                            showNotification(response.message, 'success');
-                            // Redireccionar después de un breve retraso
-                            setTimeout(function() {
-                                window.location.href = response.redirect;
-                            }, 1000);
-                        } else {
-                            showNotification(response.message, 'error');
-                            console.error("Error del servidor:", response);
-                        }
-                    } catch (e) {
-                        console.error("Error al procesar respuesta JSON:", e);
-                        console.log("Respuesta recibida:", xhr.responseText);
-                        showNotification('Error al procesar la respuesta del servidor', 'error');
+                    if (response.success) {
+                        showNotification(response.message, 'success');
+                        setTimeout(function() {
+                            window.location.href = response.redirect;
+                        }, 1000);
+                    } else {
+                        showNotification(response.message, 'error');
                     }
-                } else {
-                    showNotification('Error de conexión al servidor', 'error');
+                },
+                function(error) {
+                    document.getElementById('reservation-form').classList.remove('form-loading');
+                    showNotification('Error: ' + error, 'error');
                 }
-            };
-
-            xhr.onerror = function() {
-                // Quitar clase de carga
-                document.getElementById('reservation-form').classList.remove('form-loading');
-                showNotification('Error de conexión', 'error');
-            };
-
-            // Preparar datos
-            const formData =
-                'fecha=' + encodeURIComponent(fecha) +
-                '&hora=' + encodeURIComponent(hora) +
-                '&personas=' + encodeURIComponent(personas) +
-                '&telefono=' + encodeURIComponent(telefono) +
-                '&comentarios=' + encodeURIComponent(comentarios);
-
-            console.log("Enviando datos:", formData);
-
-            // Enviar solicitud
-            xhr.send(formData);
+            );
         });
+
 
         // Agregar el header X-Requested-With a todas las solicitudes XHR para identificarlas como AJAX
         (function() {

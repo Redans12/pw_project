@@ -1,3 +1,53 @@
+<?php
+// Iniciar sesión
+session_start();
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.html");
+    exit();
+}
+
+// Verificar si el usuario ha verificado su cuenta
+if (!isset($_SESSION['verificado']) || $_SESSION['verificado'] != 1) {
+    header("Location: verificar.php");
+    exit();
+}
+
+// Obtener el nombre de usuario desde la sesión
+$user_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Usuario';
+$usuario_id = $_SESSION['user_id'];
+
+// Conectar a la base de datos
+$db_host = "localhost";
+$db_user = "root";
+$db_password = "";
+$db_name = "cuncunul";
+
+$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
+
+// Verificar conexión
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+// Obtener las reservaciones del usuario
+$sql = "SELECT * FROM reservaciones WHERE usuario_id = $usuario_id ORDER BY fecha DESC";
+$result = $conn->query($sql);
+
+// Inicializar el array de reservaciones
+$reservaciones = [];
+
+// Comprobar si hay resultados y cargarlos
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $reservaciones[] = $row;
+    }
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -261,7 +311,7 @@
                         </div>
                     </div>
                     <div class="reservacion-acciones">
-                        <button class="btn-accion btn-editar" onclick="editarReservacion(<?php echo $reserva['id']; ?>)">Editar</button>
+                        <a href="editar_reservacion.php?id=<?php echo $reserva['id']; ?>" class="btn-accion btn-editar">Editar</a>
                         <button class="btn-accion btn-cancelar" onclick="cancelarReservacion(<?php echo $reserva['id']; ?>)">Cancelar</button>
                     </div>
                 </div>
@@ -281,9 +331,28 @@
     </footer>
 
     <script>
-        // Función para editar una reservación
-        function editarReservacion(reservacionId) {
-            window.location.href = `editar_reservacion.php?id=${reservacionId}`;
+        // Función para mostrar notificaciones
+        function showNotification(message, type = 'success') {
+            // Crear elemento de notificación
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            // Añadir al DOM
+            document.body.appendChild(notification);
+            
+            // Mostrar con animación
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            // Eliminar después de 3 segundos
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
         }
 
         // Función para cancelar una reservación
