@@ -8,7 +8,7 @@ class CuncunulChat {
         // Configurar endpoint de API dependiendo del entorno
         this.apiEndpoint = window.location.hostname.includes('vercel.app') 
             ? '/api/chat' 
-            : '/api/chat_api.php';
+            : '/pw_project/api/chat_api.php';
         
         console.log("API endpoint configurado:", this.apiEndpoint);
         

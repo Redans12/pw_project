@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prueba de Chat API</title>
+    <style>
+        body { font-family: Arial; max-width: 800px; margin: 0 auto; padding: 20px; }
+        #chat-box { border: 1px solid #ccc; height: 300px; padding: 10px; overflow-y: auto; margin-bottom: 10px; }
+        #message { width: 80%; padding: 8px; }
+        button { padding: 8px 12px; }
+    </style>
+</head>
+<body>
+    <h1>Prueba de Chat API</h1>
+    <div id="chat-box"></div>
+    <input type="text" id="message" placeholder="Escribe un mensaje...">
+    <button onclick="sendMessage()">Enviar</button>
+
+    <script>
+        function addMessage(message, isUser) {
+            const chatBox = document.getElementById('chat-box');
+            const messageDiv = document.createElement('div');
+            messageDiv.style.textAlign = isUser ? 'right' : 'left';
+            messageDiv.style.margin = '10px 0';
+            messageDiv.innerHTML = `<strong>${isUser ? 'Tú' : 'Asistente'}:</strong> ${message}`;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('message');
+            const message = messageInput.value.trim();
+            
+            if (!message) return;
+            
+            // Mostrar mensaje del usuario
+            addMessage(message, true);
+            messageInput.value = '';
+            
+            // Enviar solicitud a la API
+            fetch('http://localhost/pw_project/api/chat_api.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    addMessage(data.message, false);
+                } else {
+                    addMessage('Error: ' + (data.error || 'Respuesta no válida'), false);
+                    console.error('Error:', data);
+                }
+            })
+            .catch(error => {
+                addMessage('Error de conexión: ' + error.message, false);
+                console.error('Error de conexión:', error);
+            });
+        }
+        
+        // También permitir enviar con Enter
+        document.getElementById('message').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
