@@ -1,17 +1,16 @@
 <?php
-// Habilitar la visualización de errores para debugging
+// Iniciar sesión
+session_start();
+
+// Habilitar visualización de errores para debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Iniciar sesión
-session_start();
-
 // Log para debugging
-error_log("Solicitud recibida en ajax_register.php");
+error_log("Solicitud recibida en ajax_login.php");
 
-// Verificar si la solicitud es mediante AJAX
-// Omitir temporalmente esta verificación para pruebas
+// Comentamos temporalmente la verificación de AJAX para resolver el problema
 /*
 if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
     // No es una solicitud AJAX
@@ -23,9 +22,6 @@ if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQU
     exit;
 }
 */
-
-// Log para debugging
-error_log("Datos POST recibidos: " . print_r($_POST, true));
 
 // Conectar a la base de datos
 $db_host = "localhost";
@@ -46,105 +42,68 @@ if ($conn->connect_error) {
     exit;
 }
 
-// Verificar que exista la tabla usuarios
-$check_table = $conn->query("SHOW TABLES LIKE 'usuarios'");
-if ($check_table->num_rows == 0) {
-    // Crear la tabla si no existe
-    $create_table = "CREATE TABLE IF NOT EXISTS usuarios (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        nombre VARCHAR(100) NOT NULL,
-        email VARCHAR(100) NOT NULL UNIQUE,
-        telefono VARCHAR(20) NULL,
-        password VARCHAR(255) NOT NULL,
-        verificado TINYINT(1) DEFAULT 0,
-        codigo_verificacion VARCHAR(10) NULL,
-        expiracion_codigo DATETIME NULL,
-        fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
-        ultima_sesion DATETIME DEFAULT CURRENT_TIMESTAMP
-    )";
-    
-    if (!$conn->query($create_table)) {
-        error_log("Error al crear tabla: " . $conn->error);
-        $response = [
-            'success' => false,
-            'message' => 'Error al crear la tabla usuarios: ' . $conn->error
-        ];
-        echo json_encode($response);
-        exit;
-    }
-}
-
 // Obtener datos del formulario
-$nombre = isset($_POST['name']) ? $conn->real_escape_string($_POST['name']) : '';
 $email = isset($_POST['email']) ? $conn->real_escape_string($_POST['email']) : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
-$confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
-$telefono = isset($_POST['telefono']) ? $conn->real_escape_string($_POST['telefono']) : '';
 
-// Validación de datos
-if (empty($nombre) || empty($email) || empty($password) || empty($confirm_password)) {
+// Validar que se recibieron los datos necesarios
+if (empty($email) || empty($password)) {
     $response = [
         'success' => false,
-        'message' => 'Todos los campos son obligatorios'
+        'message' => 'Por favor, ingrese correo y contraseña'
     ];
     echo json_encode($response);
-    exit();
+    exit;
 }
 
-// Validar contraseñas
-if ($password !== $confirm_password) {
-    $response = [
-        'success' => false,
-        'message' => 'Las contraseñas no coinciden'
-    ];
-    echo json_encode($response);
-    exit();
-}
-
-// Verificar si el correo ya está registrado
-$check_email = "SELECT id FROM usuarios WHERE email = '$email'";
-$result = $conn->query($check_email);
+// Buscar usuario en la base de datos
+$sql = "SELECT id, nombre, email, password, verificado FROM usuarios WHERE email = '$email'";
+$result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    $response = [
-        'success' => false,
-        'message' => 'El correo electrónico ya está registrado'
-    ];
-    echo json_encode($response);
-    exit();
-}
-
-// Generar código de verificación aleatorio
-$codigo_verificacion = mt_rand(100000, 999999); // Código de 6 dígitos
-$expiracion = date('Y-m-d H:i:s', strtotime('+24 hours')); // Expira en 24 horas
-
-// Encriptar contraseña
-$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-// Insertar nuevo usuario con código de verificación
-$sql = "INSERT INTO usuarios (nombre, email, telefono, password, codigo_verificacion, expiracion_codigo, fecha_registro, ultima_sesion) 
-        VALUES ('$nombre', '$email', '$telefono', '$hashed_password', '$codigo_verificacion', '$expiracion', NOW(), NOW())";
-
-if ($conn->query($sql) === TRUE) {
-    // Iniciar sesión automáticamente
-    $_SESSION['user_id'] = $conn->insert_id;
-    $_SESSION['user_name'] = $nombre;
-    $_SESSION['user_email'] = $email;
-    $_SESSION['verificado'] = 0; // Usuario no verificado
+    $row = $result->fetch_assoc();
     
-    error_log("Usuario registrado con éxito: " . $nombre);
-    
-    $response = [
-        'success' => true,
-        'message' => 'Registro exitoso. Por favor verifica tu cuenta con el código: ' . $codigo_verificacion,
-        'redirect' => 'verificar.php',
-        'codigo' => $codigo_verificacion // Incluir el código en la respuesta
-    ];
+    // Verificar contraseña
+    if (password_verify($password, $row['password'])) {
+        // Iniciar sesión
+        $_SESSION['user_id'] = $row['id'];
+        $_SESSION['user_name'] = $row['nombre'];
+        $_SESSION['user_email'] = $row['email'];
+        $_SESSION['verificado'] = $row['verificado'];
+        
+        // Actualizar última sesión
+        $update_sql = "UPDATE usuarios SET ultima_sesion = NOW() WHERE id = " . $row['id'];
+        $conn->query($update_sql);
+        
+        error_log("Login exitoso para usuario: " . $row['nombre']);
+        
+        // Verificar si el usuario ha confirmado su cuenta
+        if ($row['verificado'] == 1) {
+            $response = [
+                'success' => true,
+                'message' => 'Inicio de sesión exitoso',
+                'redirect' => 'reservacion.php'
+            ];
+        } else {
+            // Si no está verificado, redirigir a la página de verificación
+            $response = [
+                'success' => true,
+                'message' => 'Por favor verifica tu cuenta',
+                'redirect' => 'verificar.php'
+            ];
+        }
+    } else {
+        error_log("Contraseña incorrecta para: " . $email);
+        $response = [
+            'success' => false,
+            'message' => 'Contraseña incorrecta'
+        ];
+    }
 } else {
-    error_log("Error al registrar: " . $conn->error);
+    error_log("Usuario no encontrado: " . $email);
     $response = [
         'success' => false,
-        'message' => 'Error al registrar: ' . $conn->error
+        'message' => 'Usuario no encontrado'
     ];
 }
 
