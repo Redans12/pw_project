@@ -157,8 +157,18 @@
             required
           />
         </div>
-        <p style="color: #e3ba7e; font-size: 0.85rem; margin-top: -10px; margin-bottom: 15px; text-align: center;">
-          Después de registrarte, recibirás un código de verificación que deberás ingresar para activar tu cuenta.
+        <!-- Cambia esta sección en login.html en el formulario de registro -->
+        <p
+          style="
+            color: #e3ba7e;
+            font-size: 0.85rem;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            text-align: center;
+          "
+        >
+          Después de registrarte, recibirás un correo electrónico con un código
+          de verificación que deberás ingresar para activar tu cuenta.
         </p>
         <button type="submit" class="btn">Registrarse</button>
 
@@ -341,7 +351,7 @@
                     mensaje = `Registro exitoso. Anota tu código de verificación: ${response.codigo}`;
                   }
                   showNotification(mensaje, "success");
-                  
+
                   // Redireccionar después de un breve retraso
                   setTimeout(function () {
                     window.location.href = response.redirect;

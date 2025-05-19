@@ -7,6 +7,14 @@ error_reporting(E_ALL);
 // Iniciar sesión
 session_start();
 
+// Cargar PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+// Cargar autoload de Composer
+require 'vendor/autoload.php';
+
 // Log para debugging
 error_log("Solicitud recibida en ajax_register.php");
 
@@ -134,12 +142,91 @@ if ($conn->query($sql) === TRUE) {
     
     error_log("Usuario registrado con éxito: " . $nombre);
     
-    $response = [
-        'success' => true,
-        'message' => 'Registro exitoso. Por favor verifica tu cuenta con el código: ' . $codigo_verificacion,
-        'redirect' => 'verificar.php',
-        'codigo' => $codigo_verificacion // Incluir el código en la respuesta
-    ];
+    // Preparar contenido del correo en formato HTML
+    $mensaje_email = "
+    <html>
+    <head>
+        <title>Verificación de tu cuenta en Cuncunul</title>
+        <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background-color: #7e2108; color: white; padding: 10px; text-align: center; }
+            .content { padding: 20px; border: 1px solid #ddd; }
+            .code { font-size: 24px; font-weight: bold; color: #7e2108; text-align: center; 
+                    padding: 10px; background-color: #f5f5f5; margin: 20px 0; }
+            .footer { font-size: 12px; text-align: center; margin-top: 20px; color: #777; }
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <div class='header'>
+                <h1>Bienvenido a Cuncunul</h1>
+            </div>
+            <div class='content'>
+                <p>Hola $nombre,</p>
+                <p>Gracias por registrarte en Restaurante Cuncunul. Para verificar tu cuenta, por favor utiliza el siguiente código de verificación:</p>
+                
+                <div class='code'>$codigo_verificacion</div>
+                
+                <p>Este código expirará en 24 horas.</p>
+                <p>Si no has solicitado este registro, por favor ignora este correo.</p>
+            </div>
+            <div class='footer'>
+                <p>Este es un correo automático, por favor no responder.</p>
+                <p>&copy; " . date('Y') . " Restaurante Cuncunul. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    ";
+    
+    // Enviar correo con PHPMailer
+    $mail = new PHPMailer(true);
+    $mail_enviado = false;
+    
+    try {
+        // Configuración del servidor
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com'; // Reemplaza con tu servidor SMTP
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'cuncunul.help@gmail.com'; // Reemplaza con tu correo
+        $mail->Password   = 'cjcd uxfs txrf tgyd'; // Reemplaza con tu contraseña o token de app
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
+        $mail->CharSet    = 'UTF-8';
+        
+        // Destinatarios
+        $mail->setFrom('noreply@cuncunul.com', 'Restaurante Cuncunul');
+        $mail->addAddress($email, $nombre);
+        
+        // Contenido
+        $mail->isHTML(true);
+        $mail->Subject = 'Verificación de cuenta - Restaurante Cuncunul';
+        $mail->Body    = $mensaje_email;
+        
+        $mail->send();
+        $mail_enviado = true;
+        error_log("Correo de verificación enviado a: " . $email);
+    } catch (Exception $e) {
+        error_log("Error al enviar correo: " . $mail->ErrorInfo);
+        $mail_enviado = false;
+    }
+    
+    if ($mail_enviado) {
+        $response = [
+            'success' => true,
+            'message' => 'Registro exitoso. Por favor, verifica tu cuenta con el código enviado a tu correo electrónico.',
+            'redirect' => 'verificar.php'
+        ];
+    } else {
+        // Si no se pudo enviar el correo, mostrar el código en la respuesta como fallback
+        $response = [
+            'success' => true,
+            'message' => 'Registro exitoso. No se pudo enviar el correo de verificación. Tu código es: ' . $codigo_verificacion,
+            'redirect' => 'verificar.php',
+            'codigo' => $codigo_verificacion
+        ];
+    }
 } else {
     error_log("Error al registrar: " . $conn->error);
     $response = [
