@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Kurale:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Coctelería Mexicana - Cuncunul</title>
+    <link rel="icon" href="resources/cero.ico" type="image/x-icon">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f1e7cd 0%, #e8dcc0 100%);
+            font-family: 'Kurale', serif;
+            padding-top: 70px;
+            color: #3a2317;
+        }
+
+        .w3-bar {
+            background: linear-gradient(135deg, #b84608 0%, #a03d07 100%) !important;
+              font-family: 'Raleway', sans-serif;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .w3-bar .w3-bar-item.w3-button {
+            color: #ffffff !important;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .w3-button:hover {
+            background-color: #8a3206 !important;
+            color: #f1e7cd !important;
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo {
+            height: 35px;
+            width: auto;
+            margin-right: 12px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .menu-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.05"/><circle cx="75" cy="75" r="1.5" fill="%23ffffff" opacity="0.03"/><circle cx="50" cy="10" r="0.8" fill="%23ffffff" opacity="0.04"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+
+       .menu-header {
+            background: linear-gradient(135deg, #bf792e 0%, #a66825 100%);
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            margin-top: -7px;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+         .menu-header h1 {
+            color: #f1e7cd;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .category-description {
+            text-align: center;
+            color: #7e2108;
+            font-style: italic;
+            margin-bottom: 3rem;
+            padding: 0 20px;
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #7e2108 0%, #5a1606 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Kurale', serif;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #5a1606 0%, #3d0f04 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .dish-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 30px 0;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(191, 121, 46, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .dish-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #bf792e 0%, #7e2108 100%);
+        }
+
+        .dish-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .dish-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .dish-name {
+            color: #7e2108;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.3;
+        }
+
+        .dish-price {
+            color: #bf792e;
+            font-size: 1.5rem;
+            font-weight: 700;
+            min-width: 100px;
+            text-align: right;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .dish-description {
+            color: #5a1606;
+            line-height: 1.8;
+            margin: 20px 0;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        .dish-icons {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .icon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(248, 244, 234, 0.8);
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: #7e2108;
+            font-weight: 500;
+            border: 1px solid rgba(191, 121, 46, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .icon:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .icon.artesanal { background: linear-gradient(135deg, #f8f4ea 0%, #f0ead6 100%); border-color: #bf792e; }
+        .icon.clasico { background: linear-gradient(135deg, #f5e9dd 0%, #ebd9c6 100%); border-color: #a66825; }
+        .icon.innovador { background: linear-gradient(135deg, #f0e6d2 0%, #e8dcc0 100%); border-color: #8a5a20; }
+        .icon.gourmet { background: linear-gradient(135deg, #f5e6e6 0%, #ebd4d4 100%); border-color: #a03d07; }
+
+        .suggested-pairing {
+            background: linear-gradient(135deg, #f8f4ea 0%, #f0ead6 100%);
+            padding: 18px 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border-left: 4px solid #bf792e;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .suggested-pairing strong {
+            color: #7e2108;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+
+        .pairing-name {
+            color: #bf792e;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+
+        @media (max-width: 768px) {
+            .dish-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .dish-price {
+                text-align: left;
+            }
+
+            .menu-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="w3-top" id="navbar">
+        <div class="w3-bar w3-padding w3-card">
+            <a href="index.html" class="w3-bar-item w3-button logo-container">
+                <img src="resources/cero.ico" alt="Logo Cuncunul" class="header-logo">
+                <span style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700;">Cuncunul</span>
+            </a>
+            <div class="w3-right w3-hide-small">
+                <a href="index.html#about" class="w3-bar-item w3-button">Sobre nosotros</a>
+                <a href="menu.html" class="w3-bar-item w3-button">Menú</a>
+                <a href="index.html#contact" class="w3-bar-item w3-button">Contacto</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-header">
+        <h1>COCTELERÍA MEXICANA GOURMET</h1>
+    </div>
+
+    <div class="category-description">
+        "El arte mixológico mexicano reinventado con ingredientes ancestrales y técnicas vanguardistas, en una sinfonía de sabores audaces"
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='menu.html'">← Volver al Menú</button>
+
+    <div class="menu-container">
+        <!-- Coctel 1 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Margarita Ancestral</h3>
+                <div class="dish-price">$220</div>
+            </div>
+            <p class="dish-description">
+                Tequila reposado artesanal infusionado con gusano de maguey, triple sec de naranja agria, 
+                jugo de limón amarillo y reducción de agave. Borde con sal de chapulín y chile pasilla, 
+                decorado con espuma de jamaica y microhojas de cilantro.
+            </p>
+            <div class="dish-icons">
+                <span class="icon artesanal">🦗 Ingrediente ancestral</span>
+                <span class="icon gourmet">👨‍🍳 Técnica molecular</span>
+            </div>
+            <div class="suggested-pairing">
+                <strong>Maridaje sugerido:</strong> <span class="pairing-name">Tostadas de Chapulín con Guacamole</span> - La combinación perfecta para una experiencia gourmet de insectos comestibles
+            </div>
+        </div>
+
+        <!-- Coctel 2 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Mezcal Ahumado</h3>
+                <div class="dish-price">$250</div>
+            </div>
+            <p class="dish-description">
+                Mezcal artesanal de Oaxaca con notas intensas, combinado con licor de cacao puro, 
+                jarabe de piloncillo ahumado y bitter de angostura. Presentado en copa de cristal 
+                con humo de roble y cristales de sal negra de Zapotitlán.
+            </p>
+            <div class="dish-icons">
+                <span class="icon artesanal">🔥 Ahumado artesanal</span>
+                <span class="icon clasico">🍫 Notas de cacao</span>
+            </div>
+            <div class="suggested-pairing">
+                <strong>Maridaje sugerido:</strong> <span class="pairing-name">Trufas de Chocolate con Chile</span> - El chocolate intensifica los sabores ahumados del mezcal
+            </div>
+        </div>
+
+        <!-- Coctel 3 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Tepache Royal</h3>
+                <div class="dish-price">$190</div>
+            </div>
+            <p class="dish-description">
+                Fermentado artesanal de piña con canela y clavo, combinado con champagne francés 
+                y reducción de tamarindo. Servido en copa flauta con espuma de jamaica, polvo de 
+                chile piquín y crujiente de maíz azul.
+            </p>
+            <div class="dish-icons">
+                <span class="icon innovador">🍍 Fermentación natural</span>
+                <span class="icon gourmet">🥂 Toque francés</span>
+            </div>
+            <div class="suggested-pairing">
+                <strong>Maridaje sugerido:</strong> <span class="pairing-name">Queso de Bola con Mermelada de Mango</span> - Los lácteos suavizan mientras la fruta potencia los sabores
+            </div>
+        </div>
+
+        <!-- Coctel 4 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Xocolatl Mexicano</h3>
+                <div class="dish-price">$230</div>
+            </div>
+            <p class="dish-description">
+                Vodka infundido con vainas de vainilla mexicana, licor de cacao criollo, 
+                crema de aguacate y especias prehispánicas (achiote, canela y pimienta gorda). 
+                Batido y servido en copa martini con virutas de chocolate amargo 70%.
+            </p>
+            <div class="dish-icons">
+                <span class="icon artesanal">🍫 Receta ancestral</span>
+                <span class="icon gourmet">🥑 Crema de aguacate</span>
+            </div>
+            <div class="suggested-pairing">
+                <strong>Maridaje sugerido:</strong> <span class="pairing-name">Pan de Elote con Mantequilla de Canela</span> - Los sabores dulces complementan la complejidad del chocolate
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 80px;"></div>
+</body>
+</html>

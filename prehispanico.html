@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Kurale&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Prehispánico - Cuncunul</title>
+    <link rel="icon" href="resources/cero.ico" type="image/x-icon">
+     <link rel="stylesheet" href="chat.css">
+    <style>
+        body {
+            background-color: #f1e7cd;
+            font-family: 'Kurale', serif;
+            padding-top: 70px;
+        }
+
+        .w3-bar {
+            background-color: #b84608 !important;
+               font-family: 'Raleway', sans-serif;
+            z-index: 1000;
+        }
+
+        .w3-bar .w3-bar-item.w3-button {
+            color: #ffffff !important;
+        }
+
+        .w3-button:hover {
+            background-color: #8a3206 !important;
+            color: white !important;
+            transform: scale(1.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo {
+            height: 30px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+         .menu-header {
+            background: linear-gradient(135deg, #bf792e 0%, #a66825 100%);
+             margin-top: -7px;
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+         .menu-header h1 {
+            color: #f1e7cd;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .category-description {
+            text-align: center;
+            color: #7e2108;
+            font-style: italic;
+            margin-bottom: 2rem;
+            padding: 0 20px;
+        }
+
+        .back-btn {
+            background-color: #7e2108;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Kurale', serif;
+        }
+
+        .back-btn:hover {
+            background-color: #5a1606;
+        }
+
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .dish-card {
+            background: white;
+            border-radius: 15px;
+            margin: 20px 0;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #bf792e;
+        }
+
+        .dish-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .dish-name {
+            color: #7e2108;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .dish-price {
+            color: #bf792e;
+            font-size: 1.3rem;
+            font-weight: bold;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .dish-description {
+            color: #5a1606;
+            line-height: 1.6;
+            margin: 15px 0;
+            font-size: 1rem;
+        }
+
+        .dish-icons {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .icon {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background-color: #f8f4ea;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #7e2108;
+        }
+
+        .icon.spicy { background-color: #ffe6e6; }
+        .icon.vegan { background-color: #e6f7e6; }
+        .icon.traditional { background-color: #fff2e6; }
+        .icon.ceremonial { background-color: #f0e6ff; }
+
+        .suggested-drink {
+            background-color: #f8f4ea;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 3px solid #bf792e;
+        }
+
+        .suggested-drink strong {
+            color: #7e2108;
+        }
+
+        .drink-name {
+            color: #bf792e;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .dish-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .dish-price {
+                text-align: left;
+            }
+
+            .dish-icons {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="w3-top" id="navbar">
+        <div class="w3-bar w3-padding w3-card">
+            <a href="index.html" class="w3-bar-item w3-button logo-container">
+                <img src="resources/cero.ico" alt="Logo Cuncunul" class="header-logo">
+                <span style="font-family: kurale, serif; font-size: larger">Cuncunul</span>
+            </a>
+            <div class="w3-right w3-hide-small">
+                <a href="index.html#about" class="w3-bar-item w3-button">Sobre nosotros</a>
+                <a href="menu.html" class="w3-bar-item w3-button">Menú</a>
+                <a href="index.html#contact" class="w3-bar-item w3-button">Contacto</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-header">
+        <h1>PREHISPÁNICO</h1>
+    </div>
+
+    <div class="category-description">
+        "Honrando las tradiciones ancestrales con ingredientes nativos y técnicas milenarias"
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='menu.html'">← Volver al Menú</button>
+
+    <div class="menu-container">
+        <!-- Plato 1 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Mole Poblano Ancestral</h3>
+                <div class="dish-price">$420</div>
+            </div>
+            <p class="dish-description">
+                Guajolote criollo bañado en mole poblano de 30 ingredientes, preparado en metate según receta 
+                tradicional. Incluye chiles mulato, ancho, pasilla, chocolate de Tabasco, almendras, pasas y especias.
+                Acompañado de arroz rojo y tortillas de maíz azul.
+            </p>
+            <div class="dish-icons">
+                <span class="icon traditional">🏺 Receta ancestral</span>
+                <span class="icon spicy">🌶️ Picante suave</span>
+                <span class="icon ceremonial">🌟 Platillo ceremonial</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>Bebida sugerida:</strong> <span class="drink-name">Chocolate Espumoso con Canela</span> - La tradición prehispánica en cada sorbo
+            </div>
+        </div>
+
+        <!-- Plato 2 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Cochinita Pibil Tradicional</h3>
+                <div class="dish-price">$380</div>
+            </div>
+            <p class="dish-description">
+                Cerdo marinado en achiote y naranja agria, cocido en horno de tierra maya por 8 horas. 
+                Envuelto en hojas de plátano con cebolla morada encurtida, habaneros y tortillas hechas a mano.
+            </p>
+            <div class="dish-icons">
+                <span class="icon traditional">🏺 Técnica maya</span>
+                <span class="icon spicy">🌶️ Picante medio</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>Bebida sugerida:</strong> <span class="drink-name">Agua de Chaya con Piña</span> - Refrescante bebida maya que equilibra los sabores
+            </div>
+        </div>
+
+        <!-- Plato 3 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Tamales de Frijol con Hoja Santa</h3>
+                <div class="dish-price">$285</div>
+            </div>
+            <p class="dish-description">
+                Masa de maíz nixtamalizado rellena de frijoles negros, quelites y hoja santa. 
+                Envueltos en hojas de maíz y cocidos al vapor. Servidos con salsa verde de tomatillo y chile de árbol.
+            </p>
+            <div class="dish-icons">
+                <span class="icon vegan">🌱 Vegano</span>
+                <span class="icon traditional">🏺 Técnica prehispánica</span>
+                <span class="icon spicy">🌶️ Picante suave</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>Bebida sugerida:</strong> <span class="drink-name">Atole de Masa con Piloncillo</span> - Complemento perfecto de la tradición mesoamericana
+            </div>
+        </div>
+
+        <!-- Plato 4 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Pescado Tikin Xic</h3>
+                <div class="dish-price">$450</div>
+            </div>
+            <p class="dish-description">
+                Huachinango entero marinado en achiote, naranja agria y especias mayas. 
+                Asado en hojas de plátano sobre brasas de carbón. Acompañado de arroz con coco y frijol colado.
+            </p>
+            <div class="dish-icons">
+                <span class="icon seafood">🐟 Del mar</span>
+                <span class="icon traditional">🏺 Receta yucateca</span>
+                <span class="icon spicy">🌶️ Picante suave</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>Bebida sugerida:</strong> <span class="drink-name">Agua de Coco con Chía</span> - Frescura tropical que realza los sabores marinos
+            </div>
+        </div>
+
+        <!-- Plato 5 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Mixiotes de Cordero</h3>
+                <div class="dish-price">$395</div>
+            </div>
+            <p class="dish-description">
+                Cordero marinado en salsa de chiles guajillo y ancho, envuelto en pencas de maguey 
+                y cocido al vapor con nopales, xoconostles y hierbas de olor. Técnica otomí ancestral.
+            </p>
+            <div class="dish-icons">
+                <span class="icon traditional">🏺 Técnica otomí</span>
+                <span class="icon spicy">🌶️ Picante medio</span>
+                <span class="icon ceremonial">🌟 Platillo de fiesta</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>Bebida sugerida:</strong> <span class="drink-name">Pulque Natural</span> - La bebida sagrada de los dioses mesoamericanos
+            </div>
+        </div>
+
+        <!-- Plato 6 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Quelites con Flores de Calabaza</h3>
+                <div class="dish-price">$245</div>
+            </div>
+            <p class="dish-description">
+                Verdolagas, quintoniles, huauzontles y flores de calabaza salteados con ajo, cebolla y chile serrano. 
+                Ingredientes silvestres recolectados tradicionalmente, servidos con tortillas de maíz criollo.
+            </p>
+            <div class="dish-icons">
+                <span class="icon vegan">🌱 Vegano</span>
+                <span class="icon traditional">🏺 Ingredientes silvestres</span>
+                <span class="icon spicy">🌶️ Picante suave</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>Bebida sugerida:</strong> <span class="drink-name">Agua de Quelites con Limón</span> - Verduras frescas en bebida refrescante
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 50px;"></div>
+</body>
+</html>

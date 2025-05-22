@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Kurale:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Contemporáneo - Cuncunul</title>
+    <link rel="icon" href="resources/cero.ico" type="image/x-icon">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f1e7cd 0%, #e8dcc0 100%);
+            font-family: 'Kurale', serif;
+            padding-top: 70px;
+            color: #3a2317;
+        }
+
+        .w3-bar {
+            background: linear-gradient(135deg, #b84608 0%, #a03d07 100%) !important;
+               font-family: 'Raleway', sans-serif;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .w3-bar .w3-bar-item.w3-button {
+            color: #ffffff !important;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .w3-button:hover {
+            background-color: #8a3206 !important;
+            color: #f1e7cd !important;
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo {
+            height: 35px;
+            width: auto;
+            margin-right: 12px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .menu-header {
+            background: linear-gradient(135deg, #bf792e 0%, #a66825 100%);
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            margin-top: -7px;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .menu-header h1 {
+            color: #f1e7cd;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .category-description {
+            text-align: center;
+            color: #7e2108;
+            font-style: italic;
+            margin-bottom: 3rem;
+            padding: 0 20px;
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #7e2108 0%, #5a1606 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Kurale', serif;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #5a1606 0%, #3d0f04 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .dish-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 30px 0;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(191, 121, 46, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .dish-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #bf792e 0%, #7e2108 100%);
+        }
+
+        .dish-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .dish-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .dish-name {
+            color: #7e2108;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.3;
+        }
+
+        .dish-price {
+            color: #bf792e;
+            font-size: 1.5rem;
+            font-weight: 700;
+            min-width: 100px;
+            text-align: right;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .dish-description {
+            color: #5a1606;
+            line-height: 1.8;
+            margin: 20px 0;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        .dish-icons {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .icon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(248, 244, 234, 0.8);
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: #7e2108;
+            font-weight: 500;
+            border: 1px solid rgba(191, 121, 46, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .icon:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .icon.fusion { background: linear-gradient(135deg, #fff5e6 0%, #ffe0cc 100%); border-color: #FF6B35; }
+        .icon.technique { background: linear-gradient(135deg, #e6f3ff 0%, #cce6ff 100%); border-color: #2196F3; }
+        .icon.premium { background: linear-gradient(135deg, #f5e6ff 0%, #ead4ff 100%); border-color: #9C27B0; }
+        .icon.innovative { background: linear-gradient(135deg, #e8f5e8 0%, #d4f2d4 100%); border-color: #4CAF50; }
+
+        .suggested-drink {
+            background: linear-gradient(135deg, #f8f4ea 0%, #f0ead6 100%);
+            padding: 18px 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border-left: 4px solid #bf792e;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .suggested-drink strong {
+            color: #7e2108;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+
+        .drink-name {
+            color: #bf792e;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+
+        @media (max-width: 768px) {
+            .dish-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .dish-price {
+                text-align: left;
+            }
+
+            .menu-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="w3-top" id="navbar">
+        <div class="w3-bar w3-padding w3-card">
+            <a href="index.html" class="w3-bar-item w3-button logo-container">
+                <img src="resources/cero.ico" alt="Logo Cuncunul" class="header-logo">
+                <span style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700;">Cuncunul</span>
+            </a>
+            <div class="w3-right w3-hide-small">
+                <a href="index.html#about" class="w3-bar-item w3-button">Sobre nosotros</a>
+                <a href="menu.html" class="w3-bar-item w3-button">Menú</a>
+                <a href="index.html#contact" class="w3-bar-item w3-button">Contacto</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-header">
+        <h1>CONTEMPORÁNEO</h1>
+    </div>
+
+    <div class="category-description">
+        "Fusión innovadora donde la tradición mexicana se encuentra con técnicas culinarias modernas para crear experiencias gastronómicas únicas"
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='menu.html'">← Volver al Menú</button>
+
+    <div class="menu-container">
+        <!-- Plato 1 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Pulpo Confitado con Mole Negro</h3>
+                <div class="dish-price">$520</div>
+            </div>
+            <p class="dish-description">
+                Tentáculos de pulpo español confitados a baja temperatura en aceite de oliva con tomillo. 
+                Servido sobre reducción de mole negro oaxaqueño, purée de camote morado y microgreens. 
+                Acompañado de tortilla de carbón activado.
+            </p>
+            <div class="dish-icons">
+                <span class="icon fusion">🌊 Fusión Mar-Tierra</span>
+                <span class="icon technique">🔬 Técnica Moderna</span>
+                <span class="icon premium">⭐ Premium</span>
+            </div>
+            <div class

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Kurale:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Exótico - Cuncunul</title>
+    <link rel="icon" href="resources/cero.ico" type="image/x-icon">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f1e7cd 0%, #e8dcc0 100%);
+            font-family: 'Kurale', serif;
+            padding-top: 70px;
+            color: #3a2317;
+        }
+
+        .w3-bar {
+            background: linear-gradient(135deg, #b84608 0%, #a03d07 100%) !important;
+               font-family: 'Raleway', sans-serif;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .w3-bar .w3-bar-item.w3-button {
+            color: #ffffff !important;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .w3-button:hover {
+            background-color: #8a3206 !important;
+            color: #f1e7cd !important;
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo {
+            height: 35px;
+            width: auto;
+            margin-right: 12px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .menu-header {
+            background: linear-gradient(135deg, #bf792e 0%, #a66825 100%);
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: -7px;
+            margin-bottom: 2rem;
+            position: relative;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+         .menu-header h1 {
+            color: #f1e7cd;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .category-description {
+            text-align: center;
+            color: #7e2108;
+            font-style: italic;
+            margin-bottom: 3rem;
+            padding: 0 20px;
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #7e2108 0%, #5a1606 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Kurale', serif;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #5a1606 0%, #3d0f04 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .dish-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 30px 0;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(191, 121, 46, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .dish-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #bf792e 0%, #7e2108 100%);
+        }
+
+        .dish-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .dish-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .dish-name {
+            color: #7e2108;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.3;
+        }
+
+        .dish-price {
+            color: #bf792e;
+            font-size: 1.5rem;
+            font-weight: 700;
+            min-width: 100px;
+            text-align: right;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .dish-description {
+            color: #5a1606;
+            line-height: 1.8;
+            margin: 20px 0;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        .dish-icons {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .icon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(248, 244, 234, 0.8);
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: #7e2108;
+            font-weight: 500;
+            border: 1px solid rgba(191, 121, 46, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .icon:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .icon.exotic { background: linear-gradient(135deg, #ff6b6b 10%, #ff8e8e 100%); border-color: #ff4757; color: white; }
+        .icon.rare { background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%); border-color: #8e44ad; color: white; }
+        .icon.adventure { background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); border-color: #e67e22; color: white; }
+        .icon.unique { background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%); border-color: #16a085; color: white; }
+
+        .suggested-drink {
+            background: linear-gradient(135deg, #f8f4ea 0%, #f0ead6 100%);
+            padding: 18px 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border-left: 4px solid #bf792e;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .suggested-drink strong {
+            color: #7e2108;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+
+        .drink-name {
+            color: #bf792e;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .warning-note {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 1px solid #ffeaa7;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #856404;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .dish-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .dish-price {
+                text-align: left;
+            }
+
+            .menu-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="w3-top" id="navbar">
+        <div class="w3-bar w3-padding w3-card">
+            <a href="index.html" class="w3-bar-item w3-button logo-container">
+                <img src="resources/cero.ico" alt="Logo Cuncunul" class="header-logo">
+                <span style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700;">Cuncunul</span>
+            </a>
+            <div class="w3-right w3-hide-small">
+                <a href="index.html#about" class="w3-bar-item w3-button">Sobre nosotros</a>
+                <a href="menu.html" class="w3-bar-item w3-button">Menú</a>
+                <a href="index.html#contact" class="w3-bar-item w3-button">Contacto</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-header">
+        <h1>EXÓTICO</h1>
+    </div>
+
+    <div class="category-description">
+        "Aventuras culinarias con ingredientes únicos y preparaciones ancestrales que despiertan los sentidos más intrépidos"
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='menu.html'">← Volver al Menú</button>
+
+    <div class="menu-container">
+        <!-- Plato 1 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Escamoles "Caviar Mexicano"</h3>
+                <div class="dish-price">$450</div>
+            </div>
+            <p class="dish-description">
+                Larvas de hormiga extraídas artesanalmente de raíces de agave, salteadas con mantequilla, 
+                epazote y chile serrano. Servidas sobre tortillas de maíz azul con guacamole de aguacate criollo 
+                y acompañadas de chapulines tostados con sal de chile piquín.
+            </p>
+            <div class="dish-icons">
+                <span class="icon exotic">🐜 Insecto Gourmet</span>
+                <span class="icon rare">💎 Ingrediente Raro</span>
+                <span class="icon adventure">🏜️ Tradición Desértica</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>Bebida sugerida:</strong> <span class="drink-name">Mezcal Artesanal con Sal de Gusano</span> - La tradición oaxaqueña en su máxima expresión
+            </div>
+            <div class="warning-note">
+                <strong>Nota:</strong> Disponibilidad limitada según temporada de recolección (marzo-mayo)
+            </div>
+        </div>
+
+        <!-- Plato 2 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Chapulines Oaxaqueños Premium</h3>
+                <div class="dish-price">$220</div>
+            </div>
+            <p class="dish-description">
+                Chapulines de temporada tostados con ajo, limón y sal de mar, servidos sobre cama de nopales baby 
+                con queso fresco de cabra, aguacate hass y salsa macha de chile costeño. 
+                Acompañados de tortillas de maíz criollo.
+            </p>
+            <div class="dish-icons">
+                <span class="icon exotic">🦗 Proteína Ancestral</span>
+                <span class="icon unique">🌿 Sustentable</span>
+                <span class="icon adventure">🏔️ Oaxaca Auténtico</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>Bebida sugerida:</strong> <span class="drink-name">Tejate Tradicional</span> - Bebida prehispánica de cacao y maíz
+            </div>
+        </div>
+
+        <!-- Plato 3 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Gusanos de Maguey en Sal de Chile</h3>
+                <div class="dish-price">$385</div>
+            </div>
+            <p class="dish-description">
+                Gusanos rojos de maguey tostados con coarse salt, servidos con salsa de chile pasilla oaxaqueño, 
+                guacamole tradicional y queso fresco. Acompañados de tortillas de maíz azul hechas a mano 
+                y mezcal joven para maridar.
+            </p>
+            <div class="dish-icons">
+                <span class="icon exotic">🍃 Del Maguey</span>
+                <span class="icon rare">🔥 Sabor Intenso</span>
+                <span class="icon unique">🌵 Proteína del Desierto</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>Bebida sugerida:</strong> <span class="drink-name">Mezcal Joven Espadín</span> - El matrimonio perfecto del agave
+            </div>
+        </div>
+
+        <!-- Plato 4 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Tacos de Iguana en Salsa Verde</h3>
+                <div class="dish-price">$320</div>
+            </div>
+            <p class="dish-description">
+                Carne de iguana deshebrada en salsa verde de tomatillo con chile serrano, servida en tortillas de maíz 
+                hechas a mano. Acompañado de cebolla morada encurtida, cilantro fresco y salsa de chile de árbol. 
+                Tradición gastronómica del sureste mexicano.
+            </p>
+            <div class="dish-icons">
+                <span class="icon exotic">🦎 Reptil Gourmet</span>
+                <span class="icon adventure">🌴 Tradición Sureña</span>
+                <span class="icon unique">🏛️ Platillo Ancestral</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>Bebida sugerida:</strong> <span class="drink-name">Cerveza Artesanal de Maíz</span> - Refrescante complemento tropical
+            </div>
+            <div class="warning-note">
+                <strong>Nota:</strong> Crianza sustentable en granjas especializadas
+            </div>
+        </div>
+
+        <!-- Plato 5 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Caldo de Siete Mares con Quelite Cenizo</h3>
+                <div class="dish-price">$395</div>
+            </div>
+            <p class="dish-description">
+                Consomé de mariscos con camarón, pulpo, almeja, mejillón, calamar, ostión y jaiba, 
+                enriquecido con quelite cenizo silvestre, chile chipotle y epazote. 
+                Servido con tortillas de maíz azul y aguacate hass.
+            </p>
+            <div class="dish-icons">
+                <span class="icon unique">🌊 Siete Mares</span>
+                <span class="icon adventure">🌿 Quelites Silvestres</span>
+                <span class="icon exotic">🦀 Mariscos Selectos</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>Bebida sugerida:</strong> <span class="drink-name">Michelada con Clamato</span> - Intensifica los sabores marinos
+            </div>
+        </div>
+
+        <!-- Plato 6 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Coctel de Caracol de Mar</h3>
+                <div class="dish-price">$285</div>
+            </div>
+            <p class="dish-description">
+                Caracol de mar fresco marinado en jugo de limón con cebolla morada, cilantro, chile serrano y aguacate. 
+                Servido con salsa picante de chile habanero, galletas saladas y tortillas tostadas. 
+                Especialidad de las costas del Pacífico mexicano.
+            </p>
+            <div class="dish-icons">
+                <span class="icon exotic">🐚 Molusco Marino</span>
+                <span class="icon adventure">🌊 Costa Pacífico</span>
+                <span class="icon unique">🍋 Ceviche Estilo</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>Bebida sugerida:</strong> <span class="drink-name">Agua de Coco con Chile</span> - Frescura tropical con un toque picante
+            </div>
+        </div>
+
+        <!-- Plato 7 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Tuétano Asado con Gusanos de Maguey</h3>
+                <div class="dish-price">$340</div>
+            </div>
+            <p class="dish-description">
+                Huesos de res con tuétano asados a las brasas, coronados con gusanos de maguey tostados, 
+                sal de chile piquín y perejil fresco. Servido con tortillas de maíz calientes y salsa verde. 
+                Experiencia culinaria única y nutritiva.
+            </p>
+            <div class="dish-icons">
+                <span class="icon exotic">🦴 Tuétano Premium</span>
+                <span class="icon rare">🔥 Asado a las Brasas</span>
+                <span class="icon adventure">🌵 Proteína Ancestral</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>Bebida sugerida:</strong> <span class="drink-name">Pulque Curado de Tuna</span> - Bebida tradicional que realza los sabores terrosos
+            </div>
+        </div>
+
+        <!-- Plato 8 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Hormigas Chicatanas en Salsa Roja</h3>
+                <div class="dish-price">$195</div>
+            </div>
+            <p class="dish-description">
+                Hormigas chicatanas tostadas y molidas en salsa roja de chile guajillo con jitomate, ajo y cebolla. 
+                Servida con tortillas de maíz criollo, queso fresco y aguacate. 
+                Delicia oaxaqueña con sabor profundo y ahumado.
+            </p>
+            <div class="dish-icons">
+                <span class="icon exotic">🐜 Hormiga Voladora</span>
+                <span class="icon unique">🌶️ Salsa Tradicional</span>
+                <span class="icon adventure">🏔️ Oaxaca Profundo</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>Bebida sugerida:</strong> <span class="drink-name">Mezcal con Chicatana</span> - El sabor ahumado se intensifica con esta combinación ancestral
+            </div>
+            <div class="warning-note">
+                <strong>Nota:</strong> Disponible solo en temporada de lluvias (junio-agosto)
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 80px;"></div>
+</body>
+</html>

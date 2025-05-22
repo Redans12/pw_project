@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Kurale&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Entradas - Cuncunul</title>
+    <link rel="icon" href="resources/cero.ico" type="image/x-icon">
+    <style>
+        body {
+            background-color: #f1e7cd;
+            font-family: 'Kurale', serif;
+            padding-top: 70px;
+        }
+
+        .w3-bar {
+            background-color: #b84608 !important;
+               font-family: 'Raleway', sans-serif;
+            z-index: 1000;
+        }
+
+        .w3-bar .w3-bar-item.w3-button {
+            color: #ffffff !important;
+        }
+
+        .w3-button:hover {
+            background-color: #8a3206 !important;
+            color: white !important;
+            transform: scale(1.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo {
+            height: 30px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .menu-header {
+            background: linear-gradient(135deg, #bf792e 0%, #a66825 100%);
+            padding: 3rem 0;
+            margin-top: -7px;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .menu-header h1 {
+            color: #f1e7cd;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+
+        .back-btn {
+            background-color: #7e2108;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Kurale', serif;
+        }
+
+        .back-btn:hover {
+            background-color: #5a1606;
+        }
+
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .dish-card {
+            background: white;
+            border-radius: 15px;
+            margin: 20px 0;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #bf792e;
+        }
+
+        .dish-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .dish-name {
+            color: #7e2108;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .dish-price {
+            color: #bf792e;
+            font-size: 1.3rem;
+            font-weight: bold;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .dish-description {
+            color: #5a1606;
+            line-height: 1.6;
+            margin: 15px 0;
+            font-size: 1rem;
+        }
+
+        .dish-icons {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .icon {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background-color: #f8f4ea;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #7e2108;
+        }
+
+        .icon.spicy { background-color: #ffe6e6; }
+        .icon.vegan { background-color: #e6f7e6; }
+        .icon.seafood { background-color: #e6f3ff; }
+
+        .suggested-drink {
+            background-color: #f8f4ea;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 3px solid #bf792e;
+        }
+
+        .suggested-drink strong {
+            color: #7e2108;
+        }
+
+        .drink-name {
+            color: #bf792e;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .dish-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .dish-price {
+                text-align: left;
+            }
+
+            .dish-icons {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="w3-top" id="navbar">
+        <div class="w3-bar w3-padding w3-card">
+            <a href="index.html" class="w3-bar-item w3-button logo-container">
+                <img src="resources/cero.ico" alt="Logo Cuncunul" class="header-logo">
+                <span style="font-family: kurale, serif; font-size: larger">Cuncunul</span>
+            </a>
+            <div class="w3-right w3-hide-small">
+                <a href="index.html#about" class="w3-bar-item w3-button">Sobre nosotros</a>
+                <a href="menu.html" class="w3-bar-item w3-button">Menú</a>
+                <a href="index.html#contact" class="w3-bar-item w3-button">Contacto</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-header">
+        <h1>ENTRADAS</h1>
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='menu.html'">← Volver al Menú</button>
+
+    <div class="menu-container">
+        <!-- Entrada 1 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Guacamole de la Casa</h3>
+                <div class="dish-price">$180</div>
+            </div>
+            <p class="dish-description">
+                Aguacates hass molcajeteados con jitomate, cebolla morada, chile serrano, cilantro y limón. 
+                Servido con totopos artesanales de maíz criollo y sal de gusano.
+            </p>
+            <div class="dish-icons">
+                <span class="icon spicy">🌶️ Picante medio</span>
+                <span class="icon vegan">🌱 Vegano</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>🍹 Bebida sugerida:</strong> <span class="drink-name">Margarita Clásica</span> - El toque cítrico complementa perfectamente el cremoso aguacate
+            </div>
+        </div>
+
+        <!-- Entrada 2 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Ceviche de Pescado Blanco</h3>
+                <div class="dish-price">$220</div>
+            </div>
+            <p class="dish-description">
+                Pescado del día marinado en jugo de limón con cebolla morada, chile habanero, cilantro y mango. 
+                Acompañado de camote morado y cancha serrana.
+            </p>
+            <div class="dish-icons">
+                <span class="icon seafood">🐟 Del mar</span>
+                <span class="icon spicy">🌶️ Picante suave</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>🍹 Bebida sugerida:</strong> <span class="drink-name">Agua de Jamaica con Limón</span> - La frescura floral equilibra los sabores cítricos
+            </div>
+        </div>
+
+        <!-- Entrada 3 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Esquites Gourmet</h3>
+                <div class="dish-price">$150</div>
+            </div>
+            <p class="dish-description">
+                Granos de elote tierno salteados con mantequilla de epazote, chile piquín, queso cotija añejo 
+                y mayonesa de chipotle. Servido en elote baby asado.
+            </p>
+            <div class="dish-icons">
+                <span class="icon spicy">🌶️ Picante medio</span>
+            </div>
+            <div class="suggested-drink">
+                <strong> 🍹 Bebida sugerida:</strong> <span class="drink-name">Cerveza Artesanal de Trigo</span> - La suavidad del trigo contrarresta el picor
+            </div>
+        </div>
+
+        <!-- Entrada 4 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Flautas de Quelites</h3>
+                <div class="dish-price">$165</div>
+            </div>
+            <p class="dish-description">
+                Tortillas de maíz azul rellenas de quelites silvestres, queso de cabra y hongos shiitake. 
+                Bañadas en salsa verde de tomatillo y crema de cilantro.
+            </p>
+            <div class="dish-icons">
+                <span class="icon vegan">🌱 Vegetariano</span>
+                <span class="icon spicy">🌶️ Picante suave</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>🍹 Bebida sugerida:</strong> <span class="drink-name">Agua de Chía con Limón</span> - Los sabores herbales se complementan naturalmente
+            </div>
+        </div>
+
+        <!-- Entrada 5 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Tostadas de Tinga de Pollo</h3>
+                <div class="dish-price">$195</div>
+            </div>
+            <p class="dish-description">
+                Pollo orgánico deshebrado en salsa de jitomate con chipotle, cebolla y ajo. 
+                Servido sobre tostadas horneadas con frijoles refritos, lechuga y queso fresco.
+            </p>
+            <div class="dish-icons">
+                <span class="icon spicy">🌶️ Picante medio</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>🍹 Bebida sugerida:</strong> <span class="drink-name">Agua de Horchata</span> - La cremosidad y canela suavizan el chipotle
+            </div>
+        </div>
+
+        <!-- Entrada 6 -->
+        <div class="dish-card">
+            <div class="dish-header">
+                <h3 class="dish-name">Quesadillas de Flor de Calabaza</h3>
+                <div class="dish-price">$175</div>
+            </div>
+            <p class="dish-description">
+                Tortillas hechas a mano rellenas de flor de calabaza, queso oaxaca derretido y epazote fresco. 
+                Acompañado de salsa roja de chile guajillo y crema agria.
+            </p>
+            <div class="dish-icons">
+                <span class="icon vegan">🌱 Vegetariano</span>
+                <span class="icon spicy">🌶️ Picante suave</span>
+            </div>
+            <div class="suggested-drink">
+                <strong>🍹 Bebida sugerida:</strong> <span class="drink-name">Té Helado de Manzanilla</span> - La suavidad floral realza los sabores delicados
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 50px;"></div>
+</body>
+</html>

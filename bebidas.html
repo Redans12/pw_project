@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Kurale:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Bebidas - Cuncunul</title>
+    <link rel="icon" href="resources/cero.ico" type="image/x-icon">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f1e7cd 0%, #e8dcc0 100%);
+            font-family: 'Kurale', serif;
+            padding-top: 70px;
+            color: #3a2317;
+        }
+
+        .w3-bar {
+            background: linear-gradient(135deg, #b84608 0%, #a03d07 100%) !important;
+              font-family: 'Raleway', sans-serif;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .w3-bar .w3-bar-item.w3-button {
+            color: #ffffff !important;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .w3-button:hover {
+            background-color: #8a3206 !important;
+            color: #f1e7cd !important;
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo {
+            height: 35px;
+            width: auto;
+            margin-right: 12px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .menu-header {
+            background: linear-gradient(135deg, #bf792e 0%, #a66825 100%);
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            margin-top: -7px;
+            position: relative;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .menu-header h1 {
+            color: #f1e7cd;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .category-description {
+            text-align: center;
+            color: #7e2108;
+            font-style: italic;
+            margin-bottom: 3rem;
+            padding: 0 20px;
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #7e2108 0%, #5a1606 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Kurale', serif;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #5a1606 0%, #3d0f04 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .category-section {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            background: linear-gradient(135deg, #7e2108 0%, #bf792e 100%);
+            color: #f1e7cd;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .drink-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            margin: 20px 0;
+            padding: 25px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+            border: 1px solid rgba(191, 121, 46, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .drink-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .drink-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .drink-name {
+            color: #7e2108;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .drink-price {
+            color: #bf792e;
+            font-size: 1.2rem;
+            font-weight: 700;
+            min-width: 80px;
+            text-align: right;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .drink-description {
+            color: #5a1606;
+            line-height: 1.6;
+            margin: 12px 0;
+            font-size: 1rem;
+        }
+
+        .drink-icons {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .icon {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(248, 244, 234, 0.8);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #7e2108;
+            font-weight: 500;
+            border: 1px solid rgba(191, 121, 46, 0.3);
+        }
+
+        .icon.traditional { background: linear-gradient(135deg, #fff2e6 0%, #ffe0cc 100%); border-color: #FF9800; }
+        .icon.fresh { background: linear-gradient(135deg, #e6f7e6 0%, #d4f2d4 100%); border-color: #4CAF50; }
+        .icon.tropical { background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%); border-color: #FFC107; }
+        .icon.hot { background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%); border-color: #F44336; }
+
+        @media (max-width: 768px) {
+            .drink-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .drink-price {
+                text-align: left;
+            }
+
+            .menu-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="w3-top" id="navbar">
+        <div class="w3-bar w3-padding w3-card">
+            <a href="index.html" class="w3-bar-item w3-button logo-container">
+                <img src="resources/cero.ico" alt="Logo Cuncunul" class="header-logo">
+                <span style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700;">Cuncunul</span>
+            </a>
+            <div class="w3-right w3-hide-small">
+                <a href="index.html#about" class="w3-bar-item w3-button">Sobre nosotros</a>
+                <a href="menu.html" class="w3-bar-item w3-button">Menú</a>
+                <a href="index.html#contact" class="w3-bar-item w3-button">Contacto</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-header">
+        <h1>BEBIDAS</h1>
+    </div>
+
+    <div class="category-description">
+        "Refrescantes elixires inspirados en la tradición mexicana para acompañar cada momento especial"
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='menu.html'">← Volver al Menú</button>
+
+    <div class="menu-container">
+        <!-- Aguas Frescas -->
+        <div class="category-section">
+            <div class="category-title">🌿 AGUAS FRESCAS TRADICIONALES</div>
+            
+            <div class="drink-card">
+                <div class="drink-header">
+                    <h3 class="drink-name">Agua de Jamaica Flor de Hibisco</h3>
+                    <div class="drink-price">$45</div>
+                </div>
+                <p class="drink-description">
+                    Flores de jamaica orgánica con un toque de jengibre fresco y endulzado con miel de abeja.
+                </p>
+                <div class="drink-icons">
+                    <span class="icon traditional">🌺 100% Natural</span>
+                    <span class="icon fresh">💧 Antioxidante</span>
+                </div>
+            </div>
+
+            <div class="drink-card">
+                <div class="drink-header">
+                    <h3 class="drink-name">Agua de Horchata Artesanal</h3>
+                    <div class="drink-price">$55</div>
+                </div>
+                <p class="drink-description">
+                    Arroz, canela de Ceylon, leche condensada, vainilla natural y un toque de ron blanco opcional.
+                </p>
+                <div class="drink-icons">
+                    <span class="icon traditional">🍚 Receta Ancestral</span>
+                    <span class="icon fresh">🥛 Cremosa</span>
+                </div>
+            </div>
+
+            <div class="drink-card">
+                <div class="drink-header">
+                    <h3 class="drink-name">Agua de Tamarindo con Chía</h3>
+                    <div class="drink-price">$50</div>
+                </div>
+                <p class="drink-description">
+                    Tamarindo natural, semillas de chía hidratadas, chile piquín y limón. Rica en fibra y antioxidantes.
+                </p>
+                <div class="drink-icons">
+                    <span class="icon tropical">🌮 Sabor Único</span>
+                    <span class="icon fresh">💪 Nutritiva</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jugos Naturales -->
+        <div class="category-section">
+            <div class="category-title">🥭 JUGOS Y LICUADOS NATURALES</div>
+            
+            <div class="drink-card">
+                <div class="drink-header">
+                    <h3 class="drink-name">Jugo Verde Detox</h3>
+                    <div class="drink-price">$65</div>
+                </div>
+                <p class="drink-description">
+                    Apio, pepino, espinacas, piña, manzana verde, jengibre y limón. Purificante y energizante.
+                </p>
+                <div class="drink-icons">
+                    <span class="icon fresh">🌱 Detox</span>
+                    <span class="icon tropical">⚡ Energizante</span>
+                </div>
+            </div>
+
+            <div class="drink-card">
+                <div class="drink-header">
+                    <h3 class="drink-name">Licuado de Mamey con Canela</h3>
+                    <div class="drink-price">$60</div>
+                </div>
+                <p class="drink-description">
+                    Mamey maduro, leche de almendra, canela molida, miel de agave y hielo. Cremoso y tropical.
+                </p>
+                <div class="drink-icons">
+                    <span class="icon tropical">🏝️ Tropical</span>
+                    <span class="icon traditional">🥛 Cremoso</span>
+                </div>
+            </div>
+
+            <div class="drink-card">
+                <div class="drink-header">
+                    <h3 class="drink-name">Jugo de Guayaba con Chile</h3>
+                    <div class="drink-price">$55</div>
+                </div>
+                <p class="drink-description">
+                    Guayaba rosa fresca, chile piquín, limón y sal de mar. Explosión de sabores mexicanos.
+                </p>
+                <div class="drink-icons">
+                    <span class="icon tropical">🌶️ Picosito</span>
+                    <span class="icon traditional">🇲🇽 100% Mexicano</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bebidas Calientes -->
+        <div class="category-section">
+            <div class="category-title">☕ BEBIDAS CALIENTES TRADICIONALES</div>
+            
+            <div class="drink-card">
+                <div class="drink-header">
+                    <h3 class="drink-name">Café de Olla Tradicional</h3>
+                    <div class="drink-price">$40</div>
+                </div>
+                <p class="drink-description">
+                    Café orgánico de Chiapas hervido en olla de barro con canela, piloncillo y cáscara de naranja.
+                </p>
+                <div class="drink-icons">
+                    <span class="icon hot">☕ Caliente</span>
+                    <span class="icon traditional">🏺 Olla de Barro</span>
+                </div>
+            </div>
+
+            <div class="drink-card">
+                <div class="drink-header">
+                    <h3 class="drink-name">Chocolate Oaxaqueño Espumoso</h3>
+                    <div class="drink-price">$70</div>
+                </div>
+                <p class="drink-description">
+                    Chocolate de tablilla oaxaqueña batido con molinillo, leche entera, canela y vainilla natural.
+                </p>
+                <div class="drink-icons">
+                    <span class="icon hot">🍫 Chocolate Puro</span>
+                    <span class="icon traditional">🥄 Molinillo</span>
+                </div>
+            </div>
+
+            <div class="drink-card">
+                <div class="drink-header">
+                    <h3 class="drink-name">Atole de Masa con Piloncillo</h3>
+                    <div class="drink-price">$45</div>
+                </div>
+                <p class="drink-description">
+                    Masa de maíz nixtamalizado, leche, piloncillo, canela y sal. Bebida reconfortante ancestral.
+                </p>
+                <div class="drink-icons">
+                    <span class="icon hot">🌽 Maíz Ancestral</span>
+                    <span class="icon traditional">🏛️ Prehispánico</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bebidas Especiales -->
+        <div class="category-section">
+            <div class="category-title">✨ BEBIDAS ESPECIALES DE LA CASA</div>
+            
+            <div class="drink-card">
+                <div class="drink-header">
+                    <h3 class="drink-name">Tejate Oaxaqueño Auténtico</h3>
+                    <div class="drink-price">$85</div>
+                </div>
+                <p class="drink-description">
+                    Bebida prehispánica de maíz, cacao, mamey y flor de cacao. Preparado tradicionalmente en jícara.
+                </p>
+                <div class="drink-icons">
+                    <span class="icon traditional">🏛️ Prehispánico</span>
+                    <span class="icon tropical">🌺 Auténtico</span>
+                </div>
+            </div>
+
+            <div class="drink-card">
+                <div class="drink-header">
+                    <h3 class="drink-name">Pulque Curado de Tuna</h3>
+                    <div class="drink-price">$75</div>
+                </div>
+                <p class="drink-description">
+                    Pulque artesanal curado con tuna roja, endulzado naturalmente. Bebida sagrada azteca.
+                </p>
+                <div class="drink-icons">
+                    <span class="icon traditional">🌵 Maguey</span>
+                    <span class="icon tropical">🍷 Fermentado</span>
+                </div>
+            </div>
+
+            <div class="drink-card">
+                <div class="drink-header">
+                    <h3 class="drink-name">Agua de Quelites con Limón</h3>
+                    <div class="drink-price">$50</div>
+                </div>
+                <p class="drink-description">
+                    Quelites silvestres, limón, chía, pepino y menta. Bebida purificante y refrescante única.
+                </p>
+                <div class="drink-icons">
+                    <span class="icon fresh">🌿 Quelites Silvestres</span>
+                    <span class="icon tropical">💚 Purificante</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 80px;"></div>
+</body>
+</html>
